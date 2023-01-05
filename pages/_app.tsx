@@ -12,7 +12,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout | any;
 };
 
-const lexend = Lexend({ subsets: ["latin"] });
+const lexend = Lexend({ subsets: ["latin"], variable: "--lexend-font" });
 
 const Main = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: any) => page);
