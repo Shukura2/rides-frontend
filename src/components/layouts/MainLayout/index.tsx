@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 const MainLayout = (page: any) => {
@@ -5,7 +6,7 @@ const MainLayout = (page: any) => {
     <div>
       <Navbar />
       {page}
-      <h4>Footer</h4>
+      <Footer />
     </div>
   );
 };
