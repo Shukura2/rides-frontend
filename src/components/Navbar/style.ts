@@ -14,19 +14,11 @@ const style = {
     alignSelf: "center",
     width: "100%",
   },
-  rides: {
-    color: "#0000FF",
-    fontSize: "24px",
-    textTransform: "uppercase",
-    fontWeight: 600,
-    fontFamily: "__Lexend_4bc04a",
-  },
   drawerLink: {
     padding: "12px 20px",
     color: color.black.main,
     fontWeight: 500,
     lineHeight: 1.2,
-    fontFamily: "__Lexend_4bc04a",
   },
   navWrap: {
     alignItems: "center",
@@ -37,7 +29,6 @@ const style = {
     padding: "12px 20px",
     color: color.black.main,
     fontWeight: 500,
-    fontFamily: "__Lexend_4bc04a",
     lineHeight: 1.2,
     ":hover": {
       backgroundColor: "#F0F0F0",

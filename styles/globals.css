@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  font-family: var(--lexend-font);
 }
 *,
 *::after,
@@ -9,7 +10,7 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: '__Lexend_4bc04a', '__Lexend_Fallback_4bc04a', sans-serif;
+  font-family: var(--lexend-font);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;

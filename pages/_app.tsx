@@ -1,9 +1,9 @@
 import type { AppProps } from "next/app";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
-import { Lexend } from "@next/font/google";
 import "../styles/globals.css";
+import theme from "@/assets/base";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -12,7 +12,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout | any;
 };
 
-const lexend = Lexend({ subsets: ["latin"], variable: "--lexend-font" });
+const lightTheme = createTheme(theme);
 
 const Main = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: any) => page);
@@ -22,14 +22,14 @@ const Main = ({ Component, pageProps }: AppPropsWithLayout) => {
       {getLayout(<Component {...pageProps} />)}
     </>
   );
-  return renderComponent;
+  return <ThemeProvider theme={lightTheme}>{renderComponent}</ThemeProvider>;
 };
 
 export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
   return (
-    <main className={lexend.className}>
+    <ThemeProvider theme={lightTheme}>
       <Main Component={Component} {...pageProps} />
-    </main>
+    </ThemeProvider>
   );
 }

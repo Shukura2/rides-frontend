@@ -4,10 +4,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { Lexend } from "@next/font/google";
 import DrawerComponent from "./Drawer";
 import { pages } from "@/staticData/NavbarData";
 import style from "./style";
 import { NavLink } from "@/types/links";
+import Logo from "../Logo";
+
+const lexend = Lexend({ subsets: ["latin"] });
 
 const Navbar = (): JSX.Element => {
   const theme = useTheme();
@@ -19,9 +23,7 @@ const Navbar = (): JSX.Element => {
         <Toolbar sx={style.toolbar}>
           <Grid container sx={style.navWrap}>
             <Grid item xs={1}>
-              <Link href="/">
-                <Typography sx={style.rides}>Rides</Typography>
-              </Link>
+              <Logo text="Rides" />
             </Grid>
             {isMobile ? (
               <DrawerComponent />
@@ -31,7 +33,12 @@ const Navbar = (): JSX.Element => {
                   const { link, path } = page;
                   return (
                     <Link href={path} key={link}>
-                      <Typography sx={style.navLink}>{link}</Typography>
+                      <Typography
+                        sx={style.navLink}
+                        className={lexend.className}
+                      >
+                        {link}
+                      </Typography>
                     </Link>
                   );
                 })}
