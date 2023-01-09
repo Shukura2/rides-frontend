@@ -1,7 +1,12 @@
+import HeroSection from "@/components/HeroSection";
 import MainLayout from "@/components/layouts/MainLayout";
 
 const Welcome = () => {
-  return <div>Welcome</div>;
+  return (
+    <div>
+      <HeroSection />
+    </div>
+  );
 };
 
 Welcome.getLayout = MainLayout;
