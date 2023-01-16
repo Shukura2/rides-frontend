@@ -20,7 +20,7 @@ export const data = [
     title: "Partner with Rides",
     others: [
       { label: "Sign up as a driver", link: "/" },
-      { label: "Sign up as a courier", link: "/" },
+      { label: "Sign up as a courier", link: "/passenger-signup" },
       { label: "Fleets", link: "/" },
       { label: "Franchise", link: "/" },
       { label: "Influencers", link: "/" },

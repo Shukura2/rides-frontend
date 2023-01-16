@@ -10,7 +10,7 @@ const color = {
     main: "#F0F0F0",
   },
   blue: {
-    main: "#0000FF",
+    main: "#1976d2",
   },
 };
 
