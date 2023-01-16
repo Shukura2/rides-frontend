@@ -2,7 +2,7 @@ import color from "@/assets/base/colors";
 
 const style = {
   container: {
-    background: color.white.main,
+    background: "#d9fde5",
   },
   wrapCenter: {
     maxWidth: "1536px",

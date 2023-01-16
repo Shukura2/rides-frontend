@@ -18,7 +18,7 @@ const HeroSection = (): JSX.Element => {
               The fast, affordable way to ride.
             </Typography>
 
-            <Link href="/">
+            <Link href="/passenger-signup">
               <Typography sx={style.link} className={lexend.className}>
                 Request a ride online
                 <span>
