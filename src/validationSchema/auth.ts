@@ -19,3 +19,13 @@ export const validateSignup = Yup.object().shape({
     .min(6, "Password should be 6 characters minimum")
     .max(12, "Password should be 12 characters maximum"),
 });
+
+export const validateLogin = Yup.object().shape({
+  email: Yup.string()
+    .email("Please enter a valid email")
+    .required("Email is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password should be 6 characters minimum")
+    .max(12, "Password should be 12 characters maximum"),
+});

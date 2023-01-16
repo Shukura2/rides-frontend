@@ -10,3 +10,7 @@ export interface SnackbarTypes {
   variant: any;
   message: string;
 }
+
+export interface LoginValues {
+  [key: string]: string;
+}

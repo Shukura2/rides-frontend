@@ -3,42 +3,39 @@ import { Lexend } from "@next/font/google";
 import axios from "axios";
 import { useState } from "react";
 import { useFormik } from "formik";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { validateSignup } from "@/validationSchema/auth";
-import { signUpField } from "@/staticData/authData";
-import { FormValues } from "@/types/auth";
+import { loginField } from "@/staticData/authData";
+import { validateLogin } from "@/validationSchema/auth";
+import { LoginValues } from "@/types/auth";
 import style from "@/components/SignUpPassenger/style";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import GoogleIcon from "../public/images/GoogleIcon";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const lexend = Lexend({ subsets: ["latin"] });
 
-const SignUpPassenger = (): JSX.Element => {
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const LoginPassenger = (): JSX.Element => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
 
-  const formik = useFormik<FormValues>({
+  const formik = useFormik<LoginValues>({
     initialValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
     },
-    validationSchema: validateSignup,
+    validationSchema: validateLogin,
     onSubmit: async (values, { resetForm }) => {
       try {
         const { data } = await axios({
           method: "post",
-          baseURL: `${API_URL}/v1/auth/passenger/signup`,
+          baseURL: `${API_URL}/v1/auth/passenger/login`,
           data: values,
         });
         setSuccessMessage(data.message);
@@ -53,7 +50,7 @@ const SignUpPassenger = (): JSX.Element => {
     <Box sx={style.wrap}>
       <Box sx={style.container}>
         <Grid container sx={{ justifyContent: "center" }}>
-          <Grid item md={5} sx={style.gridWrap}>
+          <Grid item xs={12} md={5} sx={style.gridWrap}>
             <SnackbarNotification
               open={errorMessage.length > 0}
               autoHideDuration={4000}
@@ -71,39 +68,17 @@ const SignUpPassenger = (): JSX.Element => {
               variant="filled"
               message={successMessage}
             />
-            <Box sx={style.signupWrap}>
-              <Typography sx={style.title} className={lexend.className}>
-                Sign Up
-              </Typography>
-              <Link href="/passenger-login">
-                <Typography className={lexend.className} sx={style.linkBtn}>
-                  Login
-                </Typography>
-              </Link>
-            </Box>
-
+            <Typography sx={style.title} className={lexend.className}>
+              Login
+            </Typography>
             <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Link href="/">
-                  <Box sx={style.authWrap}>
-                    <GoogleIcon />
-                    <Typography
-                      className={lexend.className}
-                      sx={style.authText}
-                    >
-                      continue with google
-                    </Typography>
-                  </Box>
-                </Link>
-              </Box>
-
-              {signUpField.map((field) => {
-                const { name, label, type, placeholder } = field;
+              {loginField.map((field) => {
+                const { type, label, name, placeholder } = field;
                 return (
                   <TextField
                     key={name}
-                    label={label}
                     type={type}
+                    label={label}
                     name={name}
                     placeholder={placeholder}
                     value={formik.values[name]}
@@ -118,6 +93,7 @@ const SignUpPassenger = (): JSX.Element => {
                   />
                 );
               })}
+
               <Button
                 variant="contained"
                 type="submit"
@@ -126,8 +102,18 @@ const SignUpPassenger = (): JSX.Element => {
                 submit
               </Button>
             </form>
+            <Box sx={style.createAcct}>
+              <Typography className={lexend.className}>
+                Don't have an account?
+              </Typography>
+              <Link href="/passenger-signup">
+                <Typography className={lexend.className} sx={style.linkBtn}>
+                  Create Account
+                </Typography>
+              </Link>
+            </Box>
           </Grid>
-          <Grid item md={6} sx={{ maxHeight: "576px" }}>
+          <Grid xs={12} item md={6} sx={{ maxHeight: "576px" }}>
             <Box
               component="img"
               alt="Smiling passenger"
@@ -141,4 +127,4 @@ const SignUpPassenger = (): JSX.Element => {
   );
 };
 
-export default SignUpPassenger;
+export default LoginPassenger;

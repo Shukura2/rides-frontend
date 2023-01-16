@@ -24,3 +24,18 @@ export const signUpField = [
     placeholder: "Your Password",
   },
 ];
+
+export const loginField = [
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Your Email",
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Your Password",
+  },
+];
