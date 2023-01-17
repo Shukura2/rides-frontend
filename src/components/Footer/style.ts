@@ -3,6 +3,7 @@ import color from "@/assets/base/colors";
 const style = {
   container: {
     backgroundColor: color.white.main,
+    borderTop: "1px solid #eee",
   },
   semiContainer: {
     maxWidth: "1536px",
