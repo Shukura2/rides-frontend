@@ -18,7 +18,7 @@ const lexend = Lexend({ subsets: ["latin"] });
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const LoginPassenger = (): JSX.Element => {
+const DriverLogin = (): JSX.Element => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -35,7 +35,7 @@ const LoginPassenger = (): JSX.Element => {
       try {
         const { data } = await axios({
           method: "post",
-          baseURL: `${API_URL}/v1/auth/passenger/login`,
+          baseURL: `${API_URL}/v1/auth/driver/login`,
           data: values,
         });
         setSuccessMessage(data.message);
@@ -92,7 +92,6 @@ const LoginPassenger = (): JSX.Element => {
                   />
                 );
               })}
-
               <Button
                 variant="contained"
                 type="submit"
@@ -105,7 +104,7 @@ const LoginPassenger = (): JSX.Element => {
               <Typography className={lexend.className}>
                 Don't have an account?
               </Typography>
-              <Link href="/passenger-signup">
+              <Link href="/driver-signup">
                 <Typography className={lexend.className} sx={style.linkBtn}>
                   Create Account
                 </Typography>
@@ -116,7 +115,7 @@ const LoginPassenger = (): JSX.Element => {
             <Box
               component="img"
               alt="Smiling passenger"
-              src="/images/smiling-passenger.jpg"
+              src="/images/cab-driver.jpg"
               sx={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </Grid>
@@ -126,4 +125,4 @@ const LoginPassenger = (): JSX.Element => {
   );
 };
 
-export default LoginPassenger;
+export default DriverLogin;

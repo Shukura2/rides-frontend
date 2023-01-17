@@ -75,7 +75,7 @@ const DriverSignup = () => {
               <Typography sx={style.title} className={lexend.className}>
                 Sign Up
               </Typography>
-              <Link href="/">
+              <Link href="/driver-login">
                 <Typography className={lexend.className} sx={style.linkBtn}>
                   Login
                 </Typography>
