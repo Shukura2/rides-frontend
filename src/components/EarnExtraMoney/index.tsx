@@ -1,6 +1,6 @@
+import Link from "next/link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { Lexend } from "@next/font/google";
 import style from "./style";
 
@@ -19,14 +19,11 @@ const EarnExtraMoney = () => {
               Set your own schedule, be your own boss.
             </Typography>
           </Box>
-          <Button
-            variant="contained"
-            disableElevation
-            sx={style.button}
-            className={lexend.className}
-          >
-            SIGN UP TO DRIVE
-          </Button>
+          <Link href="/driver-signup">
+            <Typography sx={style.button} className={lexend.className}>
+              SIGN UP TO DRIVE
+            </Typography>
+          </Link>
         </Box>
       </Box>
     </Box>
