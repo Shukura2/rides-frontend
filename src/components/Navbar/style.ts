@@ -5,7 +5,7 @@ const style = {
     height: "4rem",
     backgroundColor: color.white.main,
     position: "sticky",
-    top: "0px",
+    top: 0,
     justifyContent: "center",
     borderBottom: "1px solid #eee",
   },
@@ -34,6 +34,10 @@ const style = {
       backgroundColor: "#F0F0F0",
       borderRadius: "5px",
     },
+  },
+  activeNavlink: {
+    backgroundColor: "#F0F0F0",
+    borderRadius: "5px",
   },
 };
 

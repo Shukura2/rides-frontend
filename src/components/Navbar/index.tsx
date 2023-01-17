@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -14,6 +15,7 @@ import Logo from "../Logo";
 const lexend = Lexend({ subsets: ["latin"] });
 
 const Navbar = (): JSX.Element => {
+  const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -28,13 +30,17 @@ const Navbar = (): JSX.Element => {
             {isMobile ? (
               <DrawerComponent />
             ) : (
-              <Grid item xs={10.75} display="flex">
+              <Grid item xs={10.75} display="flex" columnGap="15px">
                 {pages.map((page: NavLink) => {
                   const { link, path } = page;
                   return (
-                    <Link href={path} key={link}>
+                    <Link href={path} key={link} passHref>
                       <Typography
-                        sx={style.navLink}
+                        sx={
+                          `${router.pathname}` === `${path}`
+                            ? [style.navLink, style.activeNavlink]
+                            : style.navLink
+                        }
                         className={lexend.className}
                       >
                         {link}
