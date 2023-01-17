@@ -52,7 +52,7 @@ const style = {
     alignItems: "center",
     marginTop: "25px",
     flexWrap: "wrap",
-    rowGap:'15px'
+    rowGap: "15px",
   },
 };
 

@@ -109,7 +109,6 @@ const SignUpPassenger = (): JSX.Element => {
                     value={formik.values[name]}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    color="black"
                     error={formik.touched[name] && Boolean(formik.errors[name])}
                     helperText={formik.touched[name] && formik.errors[name]}
                     fullWidth
@@ -127,7 +126,7 @@ const SignUpPassenger = (): JSX.Element => {
               </Button>
             </form>
           </Grid>
-          <Grid item md={6} sx={{ maxHeight: "576px" }}>
+          <Grid item md={6} sx={{ maxHeight: "676px" }}>
             <Box
               component="img"
               alt="Smiling passenger"
