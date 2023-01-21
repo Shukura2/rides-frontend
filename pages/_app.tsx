@@ -1,9 +1,10 @@
 import type { AppProps } from "next/app";
-import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import "../styles/globals.css";
 import theme from "@/assets/base";
+import { DataProvider } from "@/utils/tokenValidate";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -29,7 +30,13 @@ export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
   return (
     <ThemeProvider theme={lightTheme}>
-      <Main Component={Component} {...pageProps} />
+      {Component.auth ? (
+        <DataProvider>
+          <Main Component={Component} {...pageProps} />
+        </DataProvider>
+      ) : (
+        <Main Component={Component} {...pageProps} />
+      )}
     </ThemeProvider>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Lexend } from "@next/font/google";
 import axios from "axios";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const lexend = Lexend({ subsets: ["latin"] });
 
 const SignUpPassenger = (): JSX.Element => {
+  const router = useRouter();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -42,6 +44,11 @@ const SignUpPassenger = (): JSX.Element => {
           data: values,
         });
         setSuccessMessage(data.message);
+        localStorage.setItem("token", data.token);
+
+        setTimeout(() => {
+          router.push("/passenger-telephone");
+        }, 1000);
         resetForm();
       } catch (error: any) {
         const message = error.response.data.message;
