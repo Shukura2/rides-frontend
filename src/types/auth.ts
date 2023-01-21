@@ -14,3 +14,14 @@ export interface SnackbarTypes {
 export interface LoginValues {
   [key: string]: string;
 }
+
+export interface Data {
+  userInfo: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    passengerId: string;
+  };
+  iat: number;
+  exp: number;
+}
