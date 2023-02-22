@@ -5,14 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Lexend } from "@next/font/google";
 import DrawerComponent from "./Drawer";
 import { pages } from "@/staticData/NavbarData";
 import style from "./style";
 import { NavLink } from "@/types/links";
 import Logo from "../Logo";
-
-const lexend = Lexend({ subsets: ["latin"] });
 
 const Navbar = (): JSX.Element => {
   const router = useRouter();
@@ -41,7 +38,6 @@ const Navbar = (): JSX.Element => {
                             ? [style.navLink, style.activeNavlink]
                             : style.navLink
                         }
-                        className={lexend.className}
                       >
                         {link}
                       </Typography>

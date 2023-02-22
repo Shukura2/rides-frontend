@@ -20,7 +20,7 @@ export interface Data {
     email: string;
     firstName: string;
     lastName: string;
-    passengerId: string;
+    userId: string;
   };
   iat: number;
   exp: number;

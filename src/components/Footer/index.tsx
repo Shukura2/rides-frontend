@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LanguageIcon from "@mui/icons-material/Language";
-import { Lexend } from "@next/font/google";
 import Logo from "../Logo";
 import {
   data,
@@ -13,8 +12,6 @@ import {
 } from "@/staticData/FooterData";
 import style from "./style";
 import { DataItem, IconLink, LinkFooter } from "@/types/links";
-
-const lexend = Lexend({ subsets: ["latin"] });
 
 const Footer = (): JSX.Element => {
   return (
@@ -28,7 +25,7 @@ const Footer = (): JSX.Element => {
             <Link href="/">
               <Box sx={style.langWrap}>
                 <LanguageIcon />
-                <Typography sx={style.text} className={lexend.className}>
+                <Typography sx={style.text}>
                   English
                 </Typography>
               </Box>
@@ -37,12 +34,12 @@ const Footer = (): JSX.Element => {
 
           {data.map((item: DataItem) => (
             <Grid item xs={12} sm={6} lg={3} key={item.title}>
-              <Typography sx={style.titles} className={lexend.className}>
+              <Typography sx={style.titles}>
                 {item.title}
               </Typography>
               {item.others.map((info) => (
                 <Link href={info.link} key={info.label}>
-                  <Typography sx={style.texts} className={lexend.className}>
+                  <Typography sx={style.texts}>
                     {info.label}
                   </Typography>
                 </Link>
@@ -67,7 +64,6 @@ const Footer = (): JSX.Element => {
                 <Typography
                   key={item}
                   sx={style.fText}
-                  className={lexend.className}
                 >
                   {item}
                 </Typography>
@@ -82,7 +78,7 @@ const Footer = (): JSX.Element => {
                 const { label, link } = item;
                 return (
                   <Link href={link} key={label}>
-                    <Typography sx={style.label} className={lexend.className}>
+                    <Typography sx={style.label}>
                       {label}
                     </Typography>
                   </Link>

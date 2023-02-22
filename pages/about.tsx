@@ -1,15 +1,12 @@
-import { Lexend } from "@next/font/google";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MainLayout from "@/components/layouts/MainLayout";
 import style from "@/components/PagesStyle/style";
 
-const lexend = Lexend({ subsets: ["latin"] });
-
 const AboutUs = (): JSX.Element => {
   return (
     <Box sx={{ maxWidth: "1536px", margin: "0 auto" }}>
-      <Typography sx={style.container} className={lexend.className}>
+      <Typography sx={style.container}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, eum
         dolorum tempora veniam maxime omnis fugiat quod facilis quos ducimus
         inventore itaque iure rem totam ipsum temporibus nam dolore nesciunt.

@@ -1,10 +1,14 @@
 import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
-import "../styles/globals.css";
+import store from "@/redux/store";
 import theme from "@/assets/base";
-import { DataProvider } from "@/utils/tokenValidate";
+import TokenValidate from "@/utils/tokenValidate";
+import "../styles/globals.css";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -14,6 +18,8 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const lightTheme = createTheme(theme);
+
+let persistor = persistStore(store);
 
 const Main = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: any) => page);
@@ -29,14 +35,18 @@ const Main = ({ Component, pageProps }: AppPropsWithLayout) => {
 export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
   return (
-    <ThemeProvider theme={lightTheme}>
-      {Component.auth ? (
-        <DataProvider>
-          <Main Component={Component} {...pageProps} />
-        </DataProvider>
-      ) : (
-        <Main Component={Component} {...pageProps} />
-      )}
-    </ThemeProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={lightTheme}>
+          {Component.auth ? (
+            <TokenValidate>
+              <Main Component={Component} {...pageProps} />
+            </TokenValidate>
+          ) : (
+            <Main Component={Component} {...pageProps} />
+          )}
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 }

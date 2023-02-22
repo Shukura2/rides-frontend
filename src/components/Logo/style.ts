@@ -1,6 +1,8 @@
+import color from "@/assets/base/colors";
+
 const style = {
   rides: {
-    color: "#0000FF",
+    color: color.blue.main,
     fontSize: "24px",
     textTransform: "uppercase",
     fontWeight: 600,

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Lexend } from "@next/font/google";
-import axios from "axios";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -15,17 +15,15 @@ import { FormValues } from "@/types/auth";
 import style from "@/components/SignUpPassenger/style";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 import GoogleIcon from "../public/images/GoogleIcon";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-const lexend = Lexend({ subsets: ["latin"] });
+import { addPassenger } from "@/features/userSlice";
 
 const SignUpPassenger = (): JSX.Element => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleClose = () => setErrorMessage("");
+  const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
 
   const formik = useFormik<FormValues>({
@@ -38,21 +36,15 @@ const SignUpPassenger = (): JSX.Element => {
     validationSchema: validateSignup,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const { data } = await axios({
-          method: "post",
-          baseURL: `${API_URL}/v1/auth/passenger/signup`,
-          data: values,
-        });
-        setSuccessMessage(data.message);
-        localStorage.setItem("token", data.token);
-
+        const resultAction = await dispatch(addPassenger(values));
+        const originalPromiseResult = unwrapResult(resultAction);
+        setSuccessMessage(originalPromiseResult.message);
         setTimeout(() => {
-          router.push("/passenger-telephone");
-        }, 1000);
+          router.push("/available-rides");
+        }, 1500);
         resetForm();
-      } catch (error: any) {
-        const message = error.response.data.message;
-        setErrorMessage(message);
+      } catch (error) {
+        setErrorMessage(error.message);
       }
     },
   });
@@ -64,7 +56,7 @@ const SignUpPassenger = (): JSX.Element => {
             <SnackbarNotification
               open={errorMessage.length > 0}
               autoHideDuration={4000}
-              onClose={handleClose}
+              onClose={handleErrorClose}
               severity="error"
               variant="filled"
               message={errorMessage}
@@ -78,14 +70,11 @@ const SignUpPassenger = (): JSX.Element => {
               variant="filled"
               message={successMessage}
             />
+
             <Box sx={style.signupWrap}>
-              <Typography sx={style.title} className={lexend.className}>
-                Sign Up
-              </Typography>
-              <Link href="/passenger-login">
-                <Typography className={lexend.className} sx={style.linkBtn}>
-                  Login
-                </Typography>
+              <Typography sx={style.title}>Sign Up</Typography>
+              <Link href="/login">
+                <Typography sx={style.linkBtn}>Login</Typography>
               </Link>
             </Box>
 
@@ -94,10 +83,7 @@ const SignUpPassenger = (): JSX.Element => {
                 <Link href="/">
                   <Box sx={style.authWrap}>
                     <GoogleIcon />
-                    <Typography
-                      className={lexend.className}
-                      sx={style.authText}
-                    >
+                    <Typography sx={style.authText}>
                       continue with google
                     </Typography>
                   </Box>
