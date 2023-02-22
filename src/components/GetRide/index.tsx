@@ -1,10 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Lexend } from "@next/font/google";
 import style from "./style";
-
-const lexend = Lexend({ subsets: ["latin"] });
 
 const GetRide = () => {
   return (
@@ -21,10 +18,8 @@ const GetRide = () => {
                 />
               </Box>
               <Box>
-                <Typography sx={style.ride} className={lexend.className}>
-                  Get a ride
-                </Typography>
-                <Typography sx={style.subs} className={lexend.className}>
+                <Typography sx={style.ride}>Get a ride</Typography>
+                <Typography sx={style.subs}>
                   Bolt offers you a ride in minutes.
                 </Typography>
               </Box>
@@ -41,10 +36,8 @@ const GetRide = () => {
                 />
               </Box>
               <Box>
-                <Typography sx={style.ride} className={lexend.className}>
-                  The best prices
-                </Typography>
-                <Typography sx={style.subs} className={lexend.className}>
+                <Typography sx={style.ride}>The best prices</Typography>
+                <Typography sx={style.subs}>
                   We aim to offer the best ride prices in every city. See for
                   yourself!
                 </Typography>
@@ -61,10 +54,8 @@ const GetRide = () => {
                 />
               </Box>
               <Box>
-                <Typography sx={style.ride} className={lexend.className}>
-                  Easy to use
-                </Typography>
-                <Typography sx={style.subs} className={lexend.className}>
+                <Typography sx={style.ride}>Easy to use</Typography>
+                <Typography sx={style.subs}>
                   Get wherever you need to go as quickly as possible.
                 </Typography>
               </Box>

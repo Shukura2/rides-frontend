@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Lexend } from "@next/font/google";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -13,17 +14,17 @@ import { FormValues } from "@/types/auth";
 import { validateSignup } from "@/validationSchema/auth";
 import style from "@/components/SignUpPassenger/style";
 import GoogleIcon from "../public/images/GoogleIcon";
+import { addDriver } from "@/features/userSlice";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 
-const lexend = Lexend({ subsets: ["latin"] });
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 const DriverSignup = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleClose = () => setErrorMessage("");
+  const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
 
   const formik = useFormik<FormValues>({
@@ -36,16 +37,15 @@ const DriverSignup = () => {
     validationSchema: validateSignup,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const { data } = await axios({
-          method: "post",
-          baseURL: `${API_URL}/v1/auth/driver/signup`,
-          data: values,
-        });
-        setSuccessMessage(data.message);
+        const resultAction = await dispatch(addDriver(values));
+        const originalPromiseResult = unwrapResult(resultAction);
+        setSuccessMessage(originalPromiseResult.message);
+        setTimeout(() => {
+          router.push("/driver-dashboard");
+        }, 1500);
         resetForm();
       } catch (error: any) {
-        const message = error.response.data.message;
-        setErrorMessage(message);
+        setErrorMessage(error.message);
       }
     },
   });
@@ -57,7 +57,7 @@ const DriverSignup = () => {
             <SnackbarNotification
               open={errorMessage.length > 0}
               autoHideDuration={4000}
-              onClose={handleClose}
+              onClose={handleErrorClose}
               severity="error"
               variant="filled"
               message={errorMessage}
@@ -72,13 +72,9 @@ const DriverSignup = () => {
               message={successMessage}
             />
             <Box sx={style.signupWrap}>
-              <Typography sx={style.title} className={lexend.className}>
-                Sign Up
-              </Typography>
-              <Link href="/driver-login">
-                <Typography className={lexend.className} sx={style.linkBtn}>
-                  Login
-                </Typography>
+              <Typography sx={style.title}>Sign Up</Typography>
+              <Link href="/login">
+                <Typography sx={style.linkBtn}>Login</Typography>
               </Link>
             </Box>
 
@@ -87,10 +83,7 @@ const DriverSignup = () => {
                 <Link href="/">
                   <Box sx={style.authWrap}>
                     <GoogleIcon />
-                    <Typography
-                      className={lexend.className}
-                      sx={style.authText}
-                    >
+                    <Typography sx={style.authText}>
                       continue with google
                     </Typography>
                   </Box>

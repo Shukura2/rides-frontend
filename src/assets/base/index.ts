@@ -11,13 +11,13 @@ declare module "@mui/material/styles" {
 declare module "@mui/material/styles" {
   interface Palette {
     black?: Palette["primary"];
-    blue?: Palette["primary"];
+    white?: Palette["primary"];
   }
 
   // allow configuration using `createTheme`
   interface PaletteOptions {
     black?: PaletteOptions["primary"];
-    blue?: PaletteOptions["primary"];
+    white?: PaletteOptions["primary"];
   }
 }
 

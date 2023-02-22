@@ -29,3 +29,9 @@ export const validateLogin = Yup.object().shape({
     .min(6, "Password should be 6 characters minimum")
     .max(12, "Password should be 12 characters maximum"),
 });
+
+export const phoneNumberValidate = Yup.object().shape({
+  phoneNumber: Yup.string()
+    .matches(/^(\+[\d]{2,3})?[0-9]{10,11}$/, "Must match 08023456789")
+    .required("Phone number is required"),
+});

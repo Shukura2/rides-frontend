@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Lexend } from "@next/font/google";
-import axios from "axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,12 +14,12 @@ import { validateLogin } from "@/validationSchema/auth";
 import { LoginValues } from "@/types/auth";
 import style from "@/components/SignUpPassenger/style";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-
-const lexend = Lexend({ subsets: ["latin"] });
+import { userLogin, authSelectors } from "@/features/userSlice";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const LoginPassenger = (): JSX.Element => {
+  const dispatch = useDispatch();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const router = useRouter();
@@ -35,21 +35,26 @@ const LoginPassenger = (): JSX.Element => {
     validationSchema: validateLogin,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const { data } = await axios({
-          method: "post",
-          baseURL: `${API_URL}/v1/auth/passenger/login`,
-          data: values,
-        });
-        setSuccessMessage(data.message);
-        localStorage.setItem("token", data.token);
+        const resultAction = await dispatch(userLogin(values));
+        const originalPromiseResult = unwrapResult(resultAction);
+        setSuccessMessage(originalPromiseResult.message);
 
-        setTimeout(() => {
-          router.push("/passenger-telephone");
-        }, 1000);
-        resetForm();
+        const { userType } = originalPromiseResult.userInfo;
+
+        if (userType === "passenger") {
+          setTimeout(() => {
+            router.push("/available-rides");
+          }, 1500);
+          return;
+        }
+        if (userType === "driver") {
+          setTimeout(() => {
+            router.push("/driver-dashboard");
+          }, 1500);
+          return;
+        }
       } catch (error: any) {
-        const message = error.response.data.message;
-        setErrorMessage(message);
+        setErrorMessage(error.message);
       }
     },
   });
@@ -75,7 +80,7 @@ const LoginPassenger = (): JSX.Element => {
               variant="filled"
               message={successMessage}
             />
-            <Typography sx={style.title} className={lexend.className}>
+            <Typography sx={style.title}>
               Login
             </Typography>
             <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
@@ -109,11 +114,11 @@ const LoginPassenger = (): JSX.Element => {
               </Button>
             </form>
             <Box sx={style.createAcct}>
-              <Typography className={lexend.className}>
+              <Typography>
                 Don't have an account?
               </Typography>
               <Link href="/passenger-signup">
-                <Typography className={lexend.className} sx={style.linkBtn}>
+                <Typography sx={style.linkBtn}>
                   Create Account
                 </Typography>
               </Link>
