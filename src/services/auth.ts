@@ -1,8 +1,9 @@
 import axios from "axios";
+import { FormValues, LoginValues } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const signupUser = async (values) => {
+export const signupUser = async (values: FormValues) => {
   const { data } = await axios({
     method: "post",
     baseURL: `${API_URL}/v1/auth/passenger-signup`,
@@ -11,7 +12,7 @@ export const signupUser = async (values) => {
   return data;
 };
 
-export const signupDriver = async (values) => {
+export const signupDriver = async (values: FormValues) => {
   const { data } = await axios({
     method: "post",
     baseURL: `${API_URL}/v1/auth/driver-signup`,
@@ -20,7 +21,7 @@ export const signupDriver = async (values) => {
   return data;
 };
 
-export const loginUsers = async (values) => {
+export const loginUsers = async (values: LoginValues) => {
   const { data } = await axios({
     method: "post",
     baseURL: `${API_URL}/v1/auth/login`,

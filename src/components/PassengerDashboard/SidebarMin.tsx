@@ -12,7 +12,7 @@ const SidebarMin = () => {
       {pages.map((item) => {
         const { icon, label, link } = item;
         return (
-          <Link href={link}>
+          <Link href={link} key={link}>
             <Box
               sx={
                 `${router.pathname}` === `${link}`

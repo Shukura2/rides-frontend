@@ -39,7 +39,7 @@ const style = {
     borderRadius: "15px",
   },
   linkPad: {
-    padding: "10px 20px",
+    padding: { xs: "10px", md: "10px 20px" },
   },
   head: {
     textAlign: "center",
@@ -98,7 +98,6 @@ const style = {
     fontSize: "30px",
   },
   layout: {
-    backgroundColor: color.green.main,
     maxWidth: "1536px",
     margin: "0 auto",
   },

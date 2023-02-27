@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -18,7 +19,7 @@ import { addDriver } from "@/features/userSlice";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 
 const DriverSignup = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
   const [successMessage, setSuccessMessage] = useState<string>("");
