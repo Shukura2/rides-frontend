@@ -13,8 +13,12 @@ import color from "@/assets/base/colors";
 import Logo from "../Logo";
 import PassengerDrawer from "./PassengerDrawer";
 import style from "./style";
-import { getProfilePic } from "@/services/passenger";
+import { getProfilePic } from "@/services/user";
 import { authSelectors } from "@/features/userSlice";
+import EditProfile from "../EditProfile";
+import { logout } from "@/features/userSlice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const Navbar = ({ handleClick }): JSX.Element => {
   const {
@@ -23,6 +27,9 @@ const Navbar = ({ handleClick }): JSX.Element => {
     },
   } = useSelector(authSelectors);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const firstLetterOfUserName = firstName.charAt(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xl"));
@@ -30,6 +37,11 @@ const Navbar = ({ handleClick }): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [profilePic, setProfilePic] = useState("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleClickClose = () => {
+    setIsOpen(false);
+  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,6 +49,13 @@ const Navbar = ({ handleClick }): JSX.Element => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    setIsOpen(true);
+  };
+
+  const handleUserLogout = () => {
+    setAnchorEl(null);
+    dispatch(logout());
+    // router.push("/login");
   };
 
   const getUserPic = async () => {
@@ -98,10 +117,13 @@ const Navbar = ({ handleClick }): JSX.Element => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Edit profile</MenuItem>
+          <MenuItem onClick={handleUserLogout}>Log out</MenuItem>
         </Menu>
       </Toolbar>
+      {isOpen && (
+        <EditProfile isOpen={isOpen} handleClickClose={handleClickClose} />
+      )}
     </AppBar>
   );
 };

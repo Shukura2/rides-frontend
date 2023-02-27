@@ -5,6 +5,7 @@ import Navbar from "@/components/PassengerDashboard/Navbar";
 import SidebarMax from "@/components/PassengerDashboard/SidebarMax";
 import SidebarMin from "@/components/PassengerDashboard/SidebarMin";
 import style from "@/components/PassengerDashboard/style";
+import color from "@/assets/base/colors";
 
 const PassengerLayout = (page: any) => {
   const theme = useTheme();
@@ -17,16 +18,18 @@ const PassengerLayout = (page: any) => {
   };
 
   return (
-    <Box sx={style.layout}>
-      <Navbar handleClick={handleClick} />
-      <Box sx={{ display: "flex", width: "100%" }}>
-        <Box sx={style.sideBar}>
-          {isSidebarMax && !show && <SidebarMax />}
-          {isSidebarMax && show && <SidebarMin />}
-          {isSidebarMin && !show && <SidebarMin />}
-          {isSidebarMin && show && <SidebarMax />}
+    <Box sx={{ backgroundColor: color.green.main }}>
+      <Box sx={style.layout}>
+        <Navbar handleClick={handleClick} />
+        <Box sx={{ display: "flex", width: "100%" }}>
+          <Box sx={style.sideBar}>
+            {isSidebarMax && !show && <SidebarMax />}
+            {isSidebarMax && show && <SidebarMin />}
+            {isSidebarMin && !show && <SidebarMin />}
+            {isSidebarMin && show && <SidebarMax />}
+          </Box>
+          <Box>{page}</Box>
         </Box>
-        <Box>{page}</Box>
       </Box>
     </Box>
   );

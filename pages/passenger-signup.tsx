@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -18,7 +19,7 @@ import GoogleIcon from "../public/images/GoogleIcon";
 import { addPassenger } from "@/features/userSlice";
 
 const SignUpPassenger = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -43,7 +44,7 @@ const SignUpPassenger = (): JSX.Element => {
           router.push("/available-rides");
         }, 1500);
         resetForm();
-      } catch (error) {
+      } catch (error: any) {
         setErrorMessage(error.message);
       }
     },

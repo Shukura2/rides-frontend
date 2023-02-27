@@ -1,62 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
 import { loginUsers, signupDriver, signupUser } from "@/services/auth";
+import { FormValues, LoginValues } from "@/types";
+import { RootState } from "@/redux/store";
 
 const initialState = {
-  error: false,
+  error: "",
   success: false,
   user: {},
 };
 
-interface User {
-  message: string;
-  success: boolean;
-  userInfo: {
-    email: string;
-    firstName: string;
-    lastName: string;
-    userId: string;
-  };
-}
-interface ValidationErrors {
-  message: string;
-  field_errors: Record<string, string>;
-}
-interface CreateUser {
-  user: User;
-}
-interface UserState {
-  error: boolean;
-  success: boolean;
-  user: Record<string, User>;
-}
-
-export const addPassenger = createAsyncThunk<
-  User,
-  { userId: string } & Partial<User>,
-  {
-    rejectValue: ValidationErrors;
-  }
->("signup/passenger", async (values, { rejectWithValue }) => {
-  try {
-    const response = await signupUser(values);
-    return response;
-  } catch (err) {
-    let error: AxiosError<ValidationErrors> = err;
-    if (!error.response) {
-      throw err;
+export const addPassenger = createAsyncThunk(
+  "signup/passenger",
+  async (values: FormValues, { rejectWithValue }) => {
+    try {
+      const response = await signupUser(values);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
     }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
 export const addDriver = createAsyncThunk(
   "signup/driver",
-  async (values, { rejectWithValue }) => {
+  async (values: FormValues, { rejectWithValue }) => {
     try {
       const response = await signupDriver(values);
       return response;
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.response.data);
     }
   }
@@ -64,11 +35,11 @@ export const addDriver = createAsyncThunk(
 
 export const userLogin = createAsyncThunk(
   "login/user",
-  async (values, { rejectWithValue }) => {
+  async (values: LoginValues, { rejectWithValue }) => {
     try {
       const response = await loginUsers(values);
       return response;
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.response.data);
     }
   }
@@ -80,7 +51,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = {};
-      state.error = false;
+      state.error = "";
       state.success = false;
     },
   },
@@ -88,33 +59,49 @@ const authSlice = createSlice({
     builder.addCase(addPassenger.fulfilled, (state, action) => {
       state.user = action.payload;
       state.success = true;
+      state.error = "";
     });
     builder.addCase(addPassenger.rejected, (state, action) => {
-      state.user = action.payload;
-      state.error = true;
-      state.success = false;
+      if (action.error.message) {
+        state.error = action.error.message;
+        state.success = false;
+      }
+      if (action.payload) {
+        state.user = action.payload;
+      }
     });
     builder.addCase(addDriver.fulfilled, (state, action) => {
       state.user = action.payload;
       state.success = true;
+      state.error = "";
     });
     builder.addCase(addDriver.rejected, (state, action) => {
-      state.user = action.payload;
-      state.error = true;
-      state.success = false;
+      if (action.error.message) {
+        state.error = action.error.message;
+        state.success = false;
+      }
+      if (action.payload) {
+        state.user = action.payload;
+      }
     });
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.user = action.payload;
       state.success = true;
+      state.error = "";
     });
     builder.addCase(userLogin.rejected, (state, action) => {
-      state.user = action.payload;
-      state.error = true;
+      if (action.error.message) {
+        state.error = action.error.message;
+        state.success = false;
+      }
+      if (action.payload) {
+        state.user = action.payload;
+      }
     });
   },
 });
 
 export const { logout } = authSlice.actions;
-export const authSelectors = (state) => state.auth;
+export const authSelectors = (state: RootState) => state.auth;
 
 export default authSlice.reducer;

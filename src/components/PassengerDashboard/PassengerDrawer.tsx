@@ -33,12 +33,8 @@ const PassengerDrawer = ({ open, setOpen }): JSX.Element => {
 
       <List sx={{ margin: "0 15px" }}>
         {pages.map((page) => (
-          <Link href={page.link}>
-            <ListItem
-              key={page.label}
-              sx={style.link}
-              onClick={handleCloseDrawer}
-            >
+          <Link href={page.link} key={page.label}>
+            <ListItem sx={style.link} onClick={handleCloseDrawer}>
               <ListItemIcon
                 sx={{
                   minWidth: "0",

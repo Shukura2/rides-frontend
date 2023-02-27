@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Grid";
@@ -14,12 +15,10 @@ import { validateLogin } from "@/validationSchema/auth";
 import { LoginValues } from "@/types/auth";
 import style from "@/components/SignUpPassenger/style";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { userLogin, authSelectors } from "@/features/userSlice";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { userLogin } from "@/features/userSlice";
 
 const LoginPassenger = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const router = useRouter();
@@ -53,6 +52,7 @@ const LoginPassenger = (): JSX.Element => {
           }, 1500);
           return;
         }
+        resetForm();
       } catch (error: any) {
         setErrorMessage(error.message);
       }
@@ -80,9 +80,7 @@ const LoginPassenger = (): JSX.Element => {
               variant="filled"
               message={successMessage}
             />
-            <Typography sx={style.title}>
-              Login
-            </Typography>
+            <Typography sx={style.title}>Login</Typography>
             <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
               {loginField.map((field) => {
                 const { type, label, name, placeholder } = field;
@@ -114,13 +112,9 @@ const LoginPassenger = (): JSX.Element => {
               </Button>
             </form>
             <Box sx={style.createAcct}>
-              <Typography>
-                Don't have an account?
-              </Typography>
+              <Typography>Don't have an account?</Typography>
               <Link href="/passenger-signup">
-                <Typography sx={style.linkBtn}>
-                  Create Account
-                </Typography>
+                <Typography sx={style.linkBtn}>Create Account</Typography>
               </Link>
             </Box>
           </Grid>
