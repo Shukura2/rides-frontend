@@ -1,4 +1,4 @@
-import { FormValues } from "@/types";
+import { FormValues, responseType, inputValue } from "@/types";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -16,6 +16,25 @@ export const addPhoneNumber = async (
     url: `${API_URL}/v1/user/add-phone-number`,
     data: values,
   });
-  console.log("phone data = ", data);
+  return data;
+};
+
+export const resetPassword = async (
+  values: FormValues
+): Promise<responseType> => {
+  const { data } = await axios({
+    method: "POST",
+    url: `${API_URL}/v1/user/reset-password`,
+    data: values,
+  });
+  return data;
+};
+
+export const updatePassword = async (values: inputValue) => {
+  const { data } = await axios({
+    method: "PUT",
+    url: `${API_URL}/v1/user/update-password`,
+    data: values,
+  });
   return data;
 };

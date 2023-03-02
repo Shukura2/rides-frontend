@@ -35,3 +35,16 @@ export const phoneNumberValidate = Yup.object().shape({
     .matches(/^(\+[\d]{2,3})?[0-9]{10,11}$/, "Must match 08023456789")
     .required("Phone number is required"),
 });
+
+export const validateEmail = Yup.object().shape({
+  email: Yup.string()
+    .email("Please enter a valid email")
+    .required("Email is required"),
+});
+
+export const validatePassword = Yup.object().shape({
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password should be 6 characters minimum")
+    .max(12, "Password should be 12 characters maximum"),
+});

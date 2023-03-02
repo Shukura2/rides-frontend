@@ -25,3 +25,8 @@ export interface Data {
   iat: number;
   exp: number;
 }
+
+export interface inputValue {
+  password: string;
+  token: string | any;
+}

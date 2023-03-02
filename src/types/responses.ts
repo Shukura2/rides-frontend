@@ -16,3 +16,8 @@ export interface OffersResponse {
   success: boolean;
   totalSize: number;
 }
+
+export interface responseType {
+  message: string;
+  success: boolean;
+}
