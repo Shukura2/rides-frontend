@@ -117,6 +117,12 @@ const LoginPassenger = (): JSX.Element => {
                 <Typography sx={style.linkBtn}>Create Account</Typography>
               </Link>
             </Box>
+            <Box sx={style.createAcct}>
+              <Typography>Forget Password?</Typography>
+              <Link href="/recover-password">
+                <Typography sx={style.linkBtn}>Recover Password</Typography>
+              </Link>
+            </Box>
           </Grid>
           <Grid xs={12} item md={6} sx={{ maxHeight: "576px" }}>
             <Box
