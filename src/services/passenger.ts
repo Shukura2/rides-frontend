@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OffersResponse, FormValues } from "@/types";
+import { OffersResponse, FormValues, historyType } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -36,5 +36,10 @@ export const getSelectRide = async (
   const { data } = await axios.get(
     `${API_URL}/v1/passenger/select-offer/${rideOfferId}`
   );
+  return data;
+};
+
+export const getRideHistory = async (): Promise<historyType> => {
+  const { data } = await axios.get(`${API_URL}/v1/passenger/ride-history`);
   return data;
 };
