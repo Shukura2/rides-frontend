@@ -21,3 +21,17 @@ export interface responseType {
   message: string;
   success: boolean;
 }
+
+export interface rideHistoryType {
+  amount: number;
+  created_at: Date;
+  destination: string;
+  driver_first_name: string;
+  driver_profile_pic: string;
+  location: string;
+}
+
+export interface historyType {
+  message: rideHistoryType[];
+  success: boolean;
+}
