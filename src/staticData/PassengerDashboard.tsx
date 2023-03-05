@@ -9,3 +9,23 @@ export const pages = [
   },
   { icon: <HistoryIcon />, label: "Ride history", link: "/history" },
 ];
+
+export const offerData = [
+  {
+    label: "Location",
+    type: "text",
+    name: "location",
+    placeholder: "Your location",
+  },
+  {
+    label: "Destination",
+    type: "text",
+    name: "destination",
+    placeholder: "Your destination",
+  },
+  {
+    label: "Amount",
+    type: "number",
+    name: "amount",
+  },
+];

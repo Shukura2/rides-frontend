@@ -20,3 +20,9 @@ export interface LinkFooter {
   label: string;
   link: string;
 }
+
+export interface OffersType {
+  location: string;
+  destination: string;
+  amount: number;
+}
