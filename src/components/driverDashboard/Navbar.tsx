@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -13,7 +12,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import color from "@/assets/base/colors";
 import Logo from "../Logo";
 import style from "@/components/PassengerDashboard/style";
-import Drawer from "./Drawer";
+import DriverDrawer from "./Drawer";
 import { getProfilePic } from "@/services/user";
 import { authSelectors, logout } from "@/features/userSlice";
 import EditProfile from "../EditProfile";
@@ -80,7 +79,7 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
         </Box>
         {isMobile && openDrawer && (
           <Typography sx={{ color: color.black.main }}>
-            <Drawer open={openDrawer} setOpen={setOpenDrawer} />
+            <DriverDrawer open={openDrawer} setOpen={setOpenDrawer} />
           </Typography>
         )}
         <IconButton
