@@ -42,7 +42,7 @@ const DriverSignup = () => {
         const originalPromiseResult = unwrapResult(resultAction);
         setSuccessMessage(originalPromiseResult.message);
         setTimeout(() => {
-          router.push("/driver-dashboard");
+          router.push("/create-offer");
         }, 1500);
         resetForm();
       } catch (error: any) {

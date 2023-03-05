@@ -10,7 +10,6 @@ import color from "@/assets/base/colors";
 const PassengerLayout = (page: any) => {
   const theme = useTheme();
   const isSidebarMax = useMediaQuery(theme.breakpoints.up("xl"));
-  const isSidebarMin = useMediaQuery(theme.breakpoints.down("xl"));
   const [show, setShow] = useState(false);
 
   const handleClick = (show: boolean) => {
@@ -25,8 +24,6 @@ const PassengerLayout = (page: any) => {
           <Box sx={style.sideBar}>
             {isSidebarMax && !show && <SidebarMax />}
             {isSidebarMax && show && <SidebarMin />}
-            {isSidebarMin && !show && <SidebarMin />}
-            {isSidebarMin && show && <SidebarMax />}
           </Box>
           <Box>{page}</Box>
         </Box>
