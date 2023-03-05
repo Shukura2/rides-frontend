@@ -48,3 +48,13 @@ export const validatePassword = Yup.object().shape({
     .min(6, "Password should be 6 characters minimum")
     .max(12, "Password should be 12 characters maximum"),
 });
+
+export const validateOffers = Yup.object().shape({
+  location: Yup.string()
+    .required("Location is required")
+    .min(3, "Location should be 3 characters minimum"),
+  destination: Yup.string()
+    .required("Destination is required")
+    .min(3, "Destination should be 3 characters minimum"),
+  amount: Yup.number().required("Amount is required"),
+});
