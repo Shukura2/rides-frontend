@@ -22,6 +22,17 @@ export interface responseType {
   success: boolean;
 }
 
+export interface OffersResponseType {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  profilePic: string;
+}
+
+export interface OfferDataType {
+  message: OffersResponseType;
+}
+
 export interface rideHistoryType {
   amount: number;
   created_at: Date;

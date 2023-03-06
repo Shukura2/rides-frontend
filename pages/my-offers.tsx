@@ -1,8 +1,12 @@
 import DriverLayout from "@/components/layouts/DriverLayout";
-import React from "react";
+import { useState } from "react";
 
 const MyOffers = () => {
-  return <div>MyOffers</div>;
+  return (
+    <div>
+      <p>MyOffers</p>
+    </div>
+  );
 };
 
 MyOffers.getLayout = DriverLayout;
