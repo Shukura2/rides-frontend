@@ -5,6 +5,7 @@ import { userJoinRide } from "@/services/driver";
 import DriverLayout from "@/components/layouts/DriverLayout";
 import style from "@/components/PassengerDashboard/style";
 import { OffersResponseType } from "@/types";
+import styleOffer from "@/components/PagesStyle/style";
 
 const UserJoin = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);
@@ -17,6 +18,7 @@ const UserJoin = (): JSX.Element => {
       setOffers(response.message);
       setIsloading(false);
     } catch (error: any) {
+      setIsloading(false);
       setOffers(error.message);
     }
   };
@@ -25,23 +27,27 @@ const UserJoin = (): JSX.Element => {
     getUserJoinedRide();
   }, []);
 
+  if (isLoading) {
+    return <h4>Loading...</h4>;
+  }
+
+  if (!offers) {
+    return <Typography>No offers yet</Typography>;
+  }
+
   return (
-    <Box sx={{ padding: "25px", width: { xs: "100%", md: "35%" } }}>
-      {isLoading && <h4>Loading...</h4>}
+    <Box sx={styleOffer.offersWrap}>
       {offers && (
         <Box sx={style.ridesCard}>
           <Box component="img" src={offers.profilePic} sx={style.driverImg} />
           <Typography sx={style.driverName}>
             {offers.firstName} {offers.lastName}
           </Typography>
-          <Typography
-            sx={{ fontWeight: 600, lineHeight: 1.2, marginTop: "10px" }}
-          >
+          <Typography sx={styleOffer.offersTel}>
             {offers.phoneNumber}
           </Typography>
         </Box>
       )}
-      {!offers && <Typography>No offers yet!!!</Typography>}
     </Box>
   );
 };

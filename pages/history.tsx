@@ -24,7 +24,7 @@ const columns: GridColDef[] = [
 ];
 
 const History = () => {
-  const [tableData, setTableData] = useState<rideHistoryType | []>([]);
+  const [tableData, setTableData] = useState<rideHistoryType[] | []>([]);
 
   const getHistory = async () => {
     const response = await getRideHistory();
@@ -40,7 +40,6 @@ const History = () => {
       style={{
         height: 400,
         overflowX: "auto",
-        width: "100vw",
       }}
     >
       <DataGrid

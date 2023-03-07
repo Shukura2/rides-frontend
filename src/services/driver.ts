@@ -3,6 +3,20 @@ import { OffersType, responseType, OfferDataType } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+interface MyOffer {
+  amount: number;
+  created_at: string;
+  destination: string;
+  location: string;
+  ride_offer_id: string;
+  status: string;
+}
+
+interface MyOfferType {
+  message: MyOffer[];
+  success: boolean;
+}
+
 export const createOffers = async (
   values: OffersType
 ): Promise<responseType> => {
@@ -16,5 +30,27 @@ export const createOffers = async (
 
 export const userJoinRide = async (): Promise<OfferDataType> => {
   const { data } = await axios.get(`${API_URL}/v1/passenger/joined`);
+  return data;
+};
+
+export const getMyOffers = async (): Promise<MyOfferType> => {
+  const { data } = await axios.get(`${API_URL}/v1/driver/my-offer`);
+  return data;
+};
+
+export const deleteMyOffer = async (offerId: string): Promise<responseType> => {
+  const { data } = await axios({
+    method: "DELETE",
+    url: `${API_URL}/v1/driver/delete-offer/${offerId}`,
+  });
+  return data;
+};
+
+export const editMyOffer = async (offerId: string, value: MyOffer) => {
+  const { data } = await axios({
+    method: "PUT",
+    url: `${API_URL}/v1/driver/edit-offer/${offerId}`,
+    data: value,
+  });
   return data;
 };

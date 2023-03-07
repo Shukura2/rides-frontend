@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { authSelectors } from "@/features/userSlice";
 import { editUserProfile } from "@/services/passenger";
 import SnackbarNotification from "./SignUpPassenger/SnackbarNotification";
+import style from "./PagesStyle/style";
 
 const EditProfile = ({ isOpen, handleClickClose }) => {
   const {
@@ -39,7 +40,7 @@ const EditProfile = ({ isOpen, handleClickClose }) => {
     try {
       const response = await editUserProfile(userData);
       setSuccessMessage(response.message);
-    } catch (error) {
+    } catch (error: any) {
       setErrorMessage(error.message);
     }
   };
@@ -51,22 +52,8 @@ const EditProfile = ({ isOpen, handleClickClose }) => {
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={handleClickClose}
-      sx={{
-        "& .MuiDialog-paper": {
-          padding: "10px 20px",
-        },
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <Dialog open={isOpen} onClose={handleClickClose} sx={style.dialogWrag}>
+      <Box sx={style.dialogBox}>
         <DialogTitle sx={{ padding: "0" }}>Edit my profile</DialogTitle>
         <IconButton onClick={handleClickClose}>
           <CloseIcon />
