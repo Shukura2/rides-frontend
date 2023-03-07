@@ -46,3 +46,12 @@ export interface historyType {
   message: rideHistoryType[];
   success: boolean;
 }
+
+export interface MyOffer {
+  amount: number;
+  created_at: string;
+  destination: string;
+  location: string;
+  ride_offer_id: string;
+  status: string;
+}

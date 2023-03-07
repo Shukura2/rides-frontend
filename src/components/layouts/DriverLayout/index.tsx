@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import DriverDashboardNavbar from "@/components/DriverDashboard/Navbar";
 import SidebarMax from "@/components/DriverDashboard/SidebarMax";
 import style from "@/components/PassengerDashboard/style";
+import color from "@/assets/base/colors";
 
 const DriverLayout = (page: any) => {
   const theme = useTheme();
@@ -16,17 +17,19 @@ const DriverLayout = (page: any) => {
   };
 
   return (
-    <Box sx={style.layout}>
-      <DriverDashboardNavbar handleClick={handleClick} />
-      <Grid container>
-        <Grid item lg={1.75}>
-          {isSidebarMax && !show && <SidebarMax />}
-          {isSidebarMax && show && <SidebarMax />}
+    <Box sx={{ backgroundColor: color.green.main }}>
+      <Box sx={style.layout}>
+        <DriverDashboardNavbar handleClick={handleClick} />
+        <Grid container>
+          <Grid item lg={1.75}>
+            {isSidebarMax && !show && <SidebarMax />}
+            {isSidebarMax && show && <SidebarMax />}
+          </Grid>
+          <Grid item xs={12} lg={10.25}>
+            {page}
+          </Grid>
         </Grid>
-        <Grid item xs={12} lg={10.25}>
-          {page}
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };
