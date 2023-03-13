@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -9,7 +10,7 @@ const HeroSection = (): JSX.Element => {
   return (
     <Box sx={style.background}>
       <Box sx={style.wrapper}>
-        <Grid container sx={{ display: "flex" }}>
+        <Grid container>
           <Grid item xs={12} lg={6} sx={style.align}>
             <Typography sx={style.main}>
               The fast, affordable way to ride.
@@ -29,13 +30,19 @@ const HeroSection = (): JSX.Element => {
             xs={12}
             lg={6}
             sx={{
-              maxHeight: "770px",
+              position: "relative",
+              minHeight: { xs: "666px", lg: "0" },
             }}
           >
-            <Box
-              component="img"
+            <Image
               src="/images/smiling-girl.jpg"
-              sx={style.imageWrap}
+              alt="Passenger"
+              fill
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
             />
           </Grid>
         </Grid>

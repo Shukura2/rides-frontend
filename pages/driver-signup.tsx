@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -18,7 +19,7 @@ import GoogleIcon from "../public/images/GoogleIcon";
 import { addDriver } from "@/features/userSlice";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 
-const DriverSignup = () => {
+const DriverSignup = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
@@ -119,12 +120,17 @@ const DriverSignup = () => {
               </Button>
             </form>
           </Grid>
-          <Grid item md={6} sx={{ maxHeight: "676px" }}>
-            <Box
-              component="img"
-              alt="Smiling passenger"
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{ minHeight: { xs: "666px", lg: "0" }, position: "relative" }}
+          >
+            <Image
               src="/images/cab-driver.jpg"
-              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+              alt="Smiling passenger"
+              fill
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           </Grid>
         </Grid>

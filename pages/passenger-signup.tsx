@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -120,12 +121,24 @@ const SignUpPassenger = (): JSX.Element => {
               </Button>
             </form>
           </Grid>
-          <Grid item md={6} sx={{ maxHeight: "676px" }}>
-            <Box
-              component="img"
-              alt="Smiling passenger"
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              position: "relative",
+              minHeight: { xs: "666px", lg: "0" },
+            }}
+          >
+            <Image
               src="/images/smiling-passenger.jpg"
-              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+              alt="Woman Pix"
+              fill
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
             />
           </Grid>
         </Grid>

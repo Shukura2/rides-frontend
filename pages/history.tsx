@@ -8,13 +8,15 @@ const columns: GridColDef[] = [
   {
     field: "driver_profile_pic",
     headerName: "",
-    width: 150,
-    renderCell: (params) => (
-      <img
-        src={params.value}
-        style={{ objectFit: "cover", height: "100%", width: "100%" }}
-      />
-    ),
+    width: 52,
+    renderCell: (params) => {
+      return (
+        <img
+          src={params.value}
+          style={{ objectFit: "cover", height: "100%", width: "100%" }}
+        />
+      );
+    },
   },
   { field: "driver_first_name", headerName: "Driver Name", width: 300 },
   { field: "location", headerName: "Location", width: 300 },
@@ -23,7 +25,7 @@ const columns: GridColDef[] = [
   { field: "created_at", headerName: "Date", width: 300 },
 ];
 
-const History = () => {
+const History = (): JSX.Element => {
   const [tableData, setTableData] = useState<rideHistoryType[] | []>([]);
 
   const getHistory = async () => {

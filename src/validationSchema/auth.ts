@@ -58,3 +58,7 @@ export const validateOffers = Yup.object().shape({
     .min(3, "Destination should be 3 characters minimum"),
   amount: Yup.number().required("Amount is required"),
 });
+
+export const validateFileUpload = Yup.object().shape({
+  image: Yup.mixed().required("File is required"),
+});

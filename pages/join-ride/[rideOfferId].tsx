@@ -12,13 +12,13 @@ import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotificat
 import { Offers } from "@/types/responses";
 import style from "@/components/PagesStyle/joinRide";
 
-const SingleOffer = () => {
+const SingleOffer = (): JSX.Element => {
   const router = useRouter();
   const { rideOfferId } = router.query;
   const [offerData, setOfferData] = useState<{} | Offers>({});
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState<boolean>(false);
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
@@ -29,6 +29,7 @@ const SingleOffer = () => {
   };
 
   useEffect(() => {
+    if (!rideOfferId) return;
     getRides();
   }, [rideOfferId]);
 
