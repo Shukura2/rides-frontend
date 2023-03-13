@@ -1,4 +1,9 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { AppDispatch } from "@/redux/store";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -6,11 +11,17 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { FormValues } from "@/types";
 import { phoneNumberValidate } from "@/validationSchema/auth";
-import { addPhoneNumber } from "@/services/user";
+import { addUserPhoneNumber } from "@/features/userSlice";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 import style from "@/components/PagesStyle/telephone";
+import { authSelectors } from "@/features/userSlice";
 
 const Telephone = (): JSX.Element => {
+  const router = useRouter();
+  const {
+    user: { userInfo },
+  } = useSelector(authSelectors);
+  const dispatch = useDispatch<AppDispatch>();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -24,9 +35,16 @@ const Telephone = (): JSX.Element => {
     validationSchema: phoneNumberValidate,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const addPhone = await addPhoneNumber(values);
-        setSuccessMessage(addPhone.message);
+        const addPhone = await dispatch(addUserPhoneNumber(values));
+        const originalPromiseResult = unwrapResult(addPhone);
+        setSuccessMessage(originalPromiseResult.message);
         resetForm();
+        if (!userInfo.profilePic) {
+          setTimeout(() => {
+            router.push("/upload-profile-pic");
+          }, 3000);
+          return;
+        }
       } catch (error: any) {
         setErrorMessage(error.message);
       }

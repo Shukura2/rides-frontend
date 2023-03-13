@@ -37,8 +37,13 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const closeEdit = () => {
+    handleClose();
     setIsOpen(true);
   };
+
   const handleClickClose = () => {
     setIsOpen(false);
   };
@@ -107,7 +112,7 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Edit profile</MenuItem>
+          <MenuItem onClick={closeEdit}>Edit profile</MenuItem>
           <MenuItem onClick={handleUserLogout}>Log out</MenuItem>
         </Menu>
         {isOpen && (

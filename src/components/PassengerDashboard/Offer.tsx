@@ -1,11 +1,12 @@
-import React from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import style from "./style";
 import { Offers } from "@/types/responses";
-import Link from "next/link";
+import { authSelectors } from "@/features/userSlice";
 
 const Offer = ({
   ride_offer_id: rideOfferId,
@@ -17,6 +18,26 @@ const Offer = ({
   location,
   destination,
 }: Offers) => {
+  const router = useRouter();
+
+  const {
+    user: { userInfo },
+  } = useSelector(authSelectors);
+
+  const handleRoute = () => {
+    localStorage.setItem("offerId", JSON.stringify(rideOfferId));
+
+    if (!userInfo.phoneNumber) {
+      router.push("/telephone");
+      return;
+    }
+    if (!userInfo.profilePic) {
+      router.push("/upload-profile-pic");
+      return;
+    }
+    router.push(`/join-ride/${rideOfferId}`);
+  };
+
   return (
     <Box sx={style.ridesCard}>
       <Box sx={style.align}>
@@ -44,11 +65,14 @@ const Offer = ({
           <Typography sx={style.details}>&#x20A6;{amount}</Typography>
         </Box>
       </Box>
-      <Link href={`/join-ride/${rideOfferId}`}>
-        <Button variant="contained" sx={style.actionBtn} fullWidth>
-          Join Ride
-        </Button>
-      </Link>
+      <Button
+        onClick={handleRoute}
+        variant="contained"
+        sx={style.actionBtn}
+        fullWidth
+      >
+        Join Ride
+      </Button>
     </Box>
   );
 };

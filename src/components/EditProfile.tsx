@@ -14,7 +14,7 @@ import { editUserProfile } from "@/services/passenger";
 import SnackbarNotification from "./SignUpPassenger/SnackbarNotification";
 import style from "./PagesStyle/style";
 
-const EditProfile = ({ isOpen, handleClickClose }) => {
+const EditProfile = ({ isOpen, handleClickClose, setIsOpen }) => {
   const {
     user: {
       userInfo: { firstName, lastName },
@@ -39,16 +39,20 @@ const EditProfile = ({ isOpen, handleClickClose }) => {
   const editProfile = async () => {
     try {
       const response = await editUserProfile(userData);
+      console.log("response = ", response);
       setSuccessMessage(response.message);
     } catch (error: any) {
       setErrorMessage(error.message);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handleClickClose();
     editProfile();
+
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
   };
 
   return (
@@ -92,7 +96,7 @@ const EditProfile = ({ isOpen, handleClickClose }) => {
         </DialogActions>
 
         <SnackbarNotification
-          open={true}
+          open={errorMessage.length > 0}
           autoHideDuration={4000}
           onClose={handleErrorClose}
           severity="error"

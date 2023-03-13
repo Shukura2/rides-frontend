@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,26 +19,21 @@ import { getProfilePic } from "@/services/user";
 import { authSelectors } from "@/features/userSlice";
 import EditProfile from "../EditProfile";
 import { logout } from "@/features/userSlice";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 
-const Navbar = ({ handleClick }): JSX.Element => {
+const Navbar = ({ handleClick }): JSX.Element | null => {
   const {
-    user: {
-      userInfo: { firstName },
-    },
+    user: { userInfo },
   } = useSelector(authSelectors);
 
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const firstLetterOfUserName = firstName.charAt(0);
+  const firstLetterOfUserName = userInfo && userInfo.firstName.charAt(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xl"));
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-  const [profilePic, setProfilePic] = useState("");
+  const [profilePic, setProfilePic] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClickClose = () => {
@@ -49,13 +46,16 @@ const Navbar = ({ handleClick }): JSX.Element => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const closeEdit = () => {
+    handleClose();
     setIsOpen(true);
   };
 
   const handleUserLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
-    // router.push("/login");
   };
 
   const getUserPic = async () => {
@@ -69,8 +69,15 @@ const Navbar = ({ handleClick }): JSX.Element => {
   };
 
   useEffect(() => {
+    if (!userInfo) {
+      router.push("/login");
+    }
     getUserPic();
-  }, []);
+  }, [userInfo]);
+
+  if (!userInfo) {
+    return null;
+  }
 
   return (
     <AppBar elevation={0} sx={style.container}>
@@ -117,12 +124,16 @@ const Navbar = ({ handleClick }): JSX.Element => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Edit profile</MenuItem>
+          <MenuItem onClick={closeEdit}>Edit profile</MenuItem>
           <MenuItem onClick={handleUserLogout}>Log out</MenuItem>
         </Menu>
       </Toolbar>
       {isOpen && (
-        <EditProfile isOpen={isOpen} handleClickClose={handleClickClose} />
+        <EditProfile
+          isOpen={isOpen}
+          handleClickClose={handleClickClose}
+          setIsOpen={setIsOpen}
+        />
       )}
     </AppBar>
   );

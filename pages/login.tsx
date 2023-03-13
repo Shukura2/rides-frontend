@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -124,12 +125,17 @@ const LoginPassenger = (): JSX.Element => {
               </Link>
             </Box>
           </Grid>
-          <Grid xs={12} item md={6} sx={{ maxHeight: "576px" }}>
-            <Box
-              component="img"
-              alt="Smiling passenger"
+          <Grid
+            xs={12}
+            item
+            md={6}
+            sx={{ minHeight: { xs: "576px", lg: "0" }, position: "relative" }}
+          >
+            <Image
               src="/images/smiling-passenger.jpg"
-              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+              alt="Smiling passenger"
+              fill
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           </Grid>
         </Grid>

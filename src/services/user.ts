@@ -38,3 +38,12 @@ export const updatePassword = async (values: inputValue) => {
   });
   return data;
 };
+
+export const uploadProfilePics = async (formData: FormData) => {
+  const { data } = await axios({
+    method: "POST",
+    url: `http://localhost:5500/v1/user/upload`,
+    data: formData,
+  });
+  return data;
+};

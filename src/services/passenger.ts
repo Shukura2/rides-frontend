@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OffersResponse, FormValues, historyType } from "@/types";
+import { OffersResponse, FormValues, historyType, responseType } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,7 +13,9 @@ export const getAllOffers = async (
   return data as OffersResponse;
 };
 
-export const editUserProfile = async (values: FormValues) => {
+export const editUserProfile = async (
+  values: FormValues
+): Promise<responseType> => {
   const { data } = await axios({
     method: "PUT",
     url: `${API_URL}/v1/user/edit-profile`,
