@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,6 +11,7 @@ import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotificat
 import { uploadProfilePics } from "@/services/user";
 import { validateFileUpload } from "@/validationSchema/auth";
 import style from "@/components/PagesStyle/uploadStyle";
+import { authSelectors } from "@/features/userSlice";
 
 const UploadProfilePic = (): JSX.Element => {
   const router = useRouter();
@@ -17,6 +19,9 @@ const UploadProfilePic = (): JSX.Element => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [rideOfferId, setRideOfferId] = useState<string>("");
+  const {
+    user: { userInfo },
+  } = useSelector(authSelectors);
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
@@ -41,8 +46,12 @@ const UploadProfilePic = (): JSX.Element => {
             const upload = await uploadProfilePics(formData);
             setSuccessMessage(upload.message);
             setTimeout(() => {
+              if (userInfo.userType === "driver") {
+                router.push("/create-offer");
+                return;
+              }
               router.push(`/join-ride/${rideOfferId}`);
-            }, 4000);
+            }, 3000);
           } catch (error: any) {
             setErrorMessage(error.response.data.message);
             if (error.response.data.error) {

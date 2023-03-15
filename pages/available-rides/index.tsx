@@ -48,6 +48,10 @@ const Dashboard = (): JSX.Element => {
     }
   };
 
+  if (rides && rides.length < 1) {
+    return <Typography>No rides yet</Typography>;
+  }
+
   return (
     <Box sx={{ padding: { xs: "5px", md: "25px" } }}>
       <Typography sx={style.head}>Meet available driver's</Typography>

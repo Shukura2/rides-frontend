@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Typography from "@mui/material/Typography";
 import DriverLayout from "@/components/layouts/DriverLayout";
 import { getMyOffers } from "@/services/driver";
 import OfferData from "@/components/offers/OfferData";
@@ -11,7 +12,7 @@ const MyOffers = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [offer, setOffer] = useState({});
+  const [offerDetails, setOfferDetails] = useState({});
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
@@ -36,6 +37,8 @@ const MyOffers = (): JSX.Element => {
   }
 
   const handleDelete = async (id: string) => {
+    const del = offersData?.filter((data) => data.ride_offer_id !== id);
+    setOffersData(del);
     try {
       const delOffer = await deleteMyOffer(id);
       setSuccessMessage(delOffer.message);
@@ -46,11 +49,49 @@ const MyOffers = (): JSX.Element => {
 
   const handleEdit = (id: string) => {
     const data = offersData?.find((item) => item.ride_offer_id === id);
-    setOffer(data);
+    setOfferDetails(data);
   };
 
   return (
     <div style={{ overflowX: "auto" }}>
+      {offersData?.length > 0 ? (
+        <table
+          width="100%"
+          style={{
+            textAlign: "left",
+            borderSpacing: 20,
+            textTransform: "capitalize",
+          }}
+        >
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Destination</th>
+              <th>Amount</th>
+              <th style={{ width: "20%" }}>Date of Trip</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {offersData?.map((offer) => {
+              return (
+                <OfferData
+                  key={offer.ride_offer_id}
+                  {...offer}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  offerDetails={offerDetails}
+                  setOfferDetails={setOfferDetails}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <Typography>No data yet</Typography>
+      )}
       <SnackbarNotification
         open={errorMessage.length > 0}
         autoHideDuration={4000}
@@ -67,40 +108,6 @@ const MyOffers = (): JSX.Element => {
         variant="filled"
         message={successMessage}
       />
-      <table
-        width="100%"
-        style={{
-          textAlign: "left",
-          borderSpacing: 20,
-          textTransform: "capitalize",
-        }}
-      >
-        <thead>
-          <tr>
-            <th>Location</th>
-            <th>Destination</th>
-            <th>Amount</th>
-            <th style={{ width: "20%" }}>Date of Trip</th>
-            <th>Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {offersData?.map((offer) => {
-            return (
-              <OfferData
-                key={offer.ride_offer_id}
-                {...offer}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit}
-                offer={offer}
-                setOffer={setOffer}
-              />
-            );
-          })}
-        </tbody>
-      </table>
     </div>
   );
 };

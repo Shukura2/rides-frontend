@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { authSelectors } from "@/features/userSlice";
+import { ChildrenProps } from "@/types";
 
-export const setAuthorizationToken = (token) => {
+export const setAuthorizationToken = (token: string) => {
   if (token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
 };
 
-const TokenValidate = ({ children }) => {
+const TokenValidate = ({ children }: ChildrenProps) => {
   const [access, setAccess] = useState(false);
   const router = useRouter();
   const { user } = useSelector(authSelectors);

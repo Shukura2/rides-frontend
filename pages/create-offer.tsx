@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DriverLayout from "@/components/layouts/DriverLayout";
@@ -9,13 +12,20 @@ import { OffersType } from "@/types";
 import { offerData } from "@/staticData/PassengerDashboard";
 import { createOffers } from "@/services/driver";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
+import { authSelectors } from "@/features/userSlice";
 
 const CreateOffers = (): JSX.Element => {
+  const router = useRouter();
+  const [isLoading, setIsloading] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
+
+  const {
+    user: { userInfo },
+  } = useSelector(authSelectors);
 
   const formik = useFormik<OffersType>({
     initialValues: {
@@ -25,13 +35,20 @@ const CreateOffers = (): JSX.Element => {
     },
     validationSchema: validateOffers,
     onSubmit: async (values, { resetForm }) => {
-      try {
-        const addRide = await createOffers(values);
-        setSuccessMessage(addRide.message);
-      } catch (error: any) {
-        setErrorMessage(error.response.data.message);
+      if (!userInfo.phoneNumber) {
+        router.push("/telephone");
+        return;
+      } else {
+        setIsloading(true);
+        try {
+          const addRide = await createOffers(values);
+          setSuccessMessage(addRide.message);
+          setIsloading(false);
+        } catch (error: any) {
+          setErrorMessage(error.response.data.message);
+        }
+        resetForm();
       }
-      resetForm();
     },
   });
   return (
@@ -79,6 +96,7 @@ const CreateOffers = (): JSX.Element => {
             Submit
           </Button>
         </form>
+        {isLoading && <Typography>Loading...</Typography>}
       </Box>
     </Box>
   );

@@ -39,7 +39,6 @@ const EditProfile = ({ isOpen, handleClickClose, setIsOpen }) => {
   const editProfile = async () => {
     try {
       const response = await editUserProfile(userData);
-      console.log("response = ", response);
       setSuccessMessage(response.message);
     } catch (error: any) {
       setErrorMessage(error.message);

@@ -24,8 +24,8 @@ const OfferData = ({
   ride_offer_id,
   handleDelete,
   handleEdit,
-  offer,
-  setOffer,
+  offerDetails,
+  setOfferDetails,
 }: MyOffer) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -37,9 +37,15 @@ const OfferData = ({
   const handleClose = () => {
     setOpenDialog(false);
   };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setOfferDetails({ ...offerDetails, [name]: value });
+  };
+
   const editOffer = async () => {
     try {
-      const response = await editMyOffer(ride_offer_id, offer);
+      const response = await editMyOffer(ride_offer_id, offerDetails);
       setSuccessMessage(response.message);
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -52,10 +58,6 @@ const OfferData = ({
     editOffer();
   };
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setOffer({ ...offer, [name]: value });
-  };
   return (
     <>
       <tr>
@@ -100,7 +102,7 @@ const OfferData = ({
                 label="Location"
                 type="text"
                 name="location"
-                value={offer.location}
+                value={offerDetails.location}
                 onChange={handleChange}
                 fullWidth
                 focused
@@ -110,7 +112,7 @@ const OfferData = ({
                 label="Destination"
                 type="text"
                 name="destination"
-                value={offer.destination}
+                value={offerDetails.destination}
                 onChange={handleChange}
                 fullWidth
                 focused
@@ -120,7 +122,7 @@ const OfferData = ({
                 label="Amount"
                 type="number"
                 name="amount"
-                value={offer.amount}
+                value={offerDetails.amount}
                 onChange={handleChange}
                 fullWidth
                 focused
@@ -136,25 +138,25 @@ const OfferData = ({
                 Update offer
               </Button>
             </DialogActions>
-            <SnackbarNotification
-              open={true}
-              autoHideDuration={4000}
-              onClose={handleErrorClose}
-              severity="error"
-              variant="filled"
-              message={errorMessage}
-            />
-            <SnackbarNotification
-              open={successMessage.length > 0}
-              autoHideDuration={4000}
-              onClose={handleSuccessClose}
-              severity="success"
-              variant="filled"
-              message={successMessage}
-            />
           </form>
         </Dialog>
       )}
+      <SnackbarNotification
+        open={errorMessage.length > 0}
+        autoHideDuration={4000}
+        onClose={handleErrorClose}
+        severity="error"
+        variant="filled"
+        message={errorMessage}
+      />
+      <SnackbarNotification
+        open={successMessage.length > 0}
+        autoHideDuration={4000}
+        onClose={handleSuccessClose}
+        severity="success"
+        variant="filled"
+        message={successMessage}
+      />
     </>
   );
 };

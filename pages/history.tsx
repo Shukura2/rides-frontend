@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import Typography from "@mui/material/Typography";
 import PassengerLayout from "@/components/layouts/PassengerLayout";
 import { getRideHistory } from "@/services/passenger";
 import { rideHistoryType } from "@/types";
@@ -36,6 +37,10 @@ const History = (): JSX.Element => {
   useEffect(() => {
     getHistory();
   }, []);
+
+  if (tableData.length < 1) {
+    return <Typography>No offers yet</Typography>;
+  }
 
   return (
     <div

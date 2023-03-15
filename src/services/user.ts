@@ -1,5 +1,5 @@
-import { FormValues, responseType, inputValue } from "@/types";
 import axios from "axios";
+import { FormValues, responseType, inputValue } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

@@ -2,7 +2,7 @@ export interface Offers {
   ride_offer_id: string;
   driver_first_name: string;
   driver_last_name: string;
-  driver_phone_number: string | null;
+  driver_phone_number: string;
   driver_profile_pic: string;
   amount: number;
   location: string;
@@ -54,4 +54,18 @@ export interface MyOffer {
   location: string;
   ride_offer_id: string;
   status: string;
+}
+
+export interface MyOffer {
+  amount: number;
+  created_at: string;
+  destination: string;
+  location: string;
+  ride_offer_id: string;
+  status: string;
+}
+
+export interface MyOfferType {
+  message: MyOffer[];
+  success: boolean;
 }

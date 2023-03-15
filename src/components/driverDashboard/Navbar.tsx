@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -19,13 +20,12 @@ import EditProfile from "../EditProfile";
 
 const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
   const {
-    user: {
-      userInfo: { firstName },
-    },
+    user: { userInfo },
   } = useSelector(authSelectors);
 
+  const router = useRouter();
   const dispatch = useDispatch();
-  const firstLetterOfUserName = firstName.charAt(0);
+  const firstLetterOfUserName = userInfo && userInfo.firstName.charAt(0);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [profilePic, setProfilePic] = useState<string>("");
@@ -65,8 +65,11 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
     }
   };
   useEffect(() => {
+    if (!userInfo) {
+      router.push("/login");
+    }
     getUserPic();
-  }, []);
+  }, [userInfo]);
   return (
     <AppBar elevation={0} sx={style.container}>
       <Toolbar sx={style.toolboxWrap}>
@@ -116,7 +119,11 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
           <MenuItem onClick={handleUserLogout}>Log out</MenuItem>
         </Menu>
         {isOpen && (
-          <EditProfile isOpen={isOpen} handleClickClose={handleClickClose} />
+          <EditProfile
+            isOpen={isOpen}
+            handleClickClose={handleClickClose}
+            setIsOpen={setIsOpen}
+          />
         )}
       </Toolbar>
     </AppBar>

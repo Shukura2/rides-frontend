@@ -31,24 +31,22 @@ const UserJoin = (): JSX.Element => {
     return <h4>Loading...</h4>;
   }
 
-  if (!offers) {
-    return <Typography>No offers yet</Typography>;
-  }
-
   return (
-    <Box sx={styleOffer.offersWrap}>
+    <>
       {offers && (
-        <Box sx={style.ridesCard}>
-          <Box component="img" src={offers.profilePic} sx={style.driverImg} />
-          <Typography sx={style.driverName}>
-            {offers.firstName} {offers.lastName}
-          </Typography>
-          <Typography sx={styleOffer.offersTel}>
-            {offers.phoneNumber}
-          </Typography>
+        <Box sx={styleOffer.offersWrap}>
+          <Box sx={style.ridesCard}>
+            <Box component="img" src={offers.profilePic} sx={style.driverImg} />
+            <Typography sx={style.driverName}>
+              {offers.firstName} {offers.lastName}
+            </Typography>
+            <Typography sx={styleOffer.offersTel}>
+              {offers.phoneNumber}
+            </Typography>
+          </Box>
         </Box>
       )}
-    </Box>
+    </>
   );
 };
 
