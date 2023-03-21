@@ -27,7 +27,7 @@ const UploadProfilePic = (): JSX.Element => {
   const handleSuccessClose = () => setSuccessMessage("");
 
   useEffect(() => {
-    const getOfferId = JSON.parse(localStorage.getItem("offerId"));
+    const getOfferId = JSON.parse(localStorage.getItem("offerId") || "");
     if (getOfferId) {
       setRideOfferId(getOfferId);
       return;
@@ -46,7 +46,7 @@ const UploadProfilePic = (): JSX.Element => {
             const upload = await uploadProfilePics(formData);
             setSuccessMessage(upload.message);
             setTimeout(() => {
-              if (userInfo.userType === "driver") {
+              if (userInfo && userInfo.userType === "driver") {
                 router.push("/create-offer");
                 return;
               }
@@ -85,8 +85,10 @@ const UploadProfilePic = (): JSX.Element => {
                             );
                           }
                           const file = event.currentTarget.files;
-                          const fileName = file[0].name;
-                          setFileInfo(fileName);
+                          const fileName = file && file[0].name;
+                          if (fileName) {
+                            setFileInfo(fileName);
+                          }
                         }}
                         hidden
                       />

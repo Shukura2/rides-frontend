@@ -15,10 +15,13 @@ export const setAuthorizationToken = (token: string) => {
 const TokenValidate = ({ children }: ChildrenProps) => {
   const [access, setAccess] = useState(false);
   const router = useRouter();
-  const { user } = useSelector(authSelectors);
+  const { user } = useSelector(authSelectors) || {};
 
   const isTokenValidate = () => {
-    const decodeToken = jwt_decode(user.token);
+    if (!user.token) {
+      return router.push("/login");
+    }
+    const decodeToken: any = jwt_decode(user.token);
     const { exp } = decodeToken;
     const currentDate = Date.now();
     if (currentDate >= exp * 1000) {

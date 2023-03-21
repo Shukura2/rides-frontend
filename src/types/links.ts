@@ -26,3 +26,14 @@ export interface OffersType {
   destination: string;
   amount: number;
 }
+
+export interface EditProfileType {
+  isOpen: boolean;
+  handleClickClose: () => void;
+  setIsOpen: (show: boolean) => void;
+}
+
+export interface handleClickType {
+  handleClick: (show: boolean) => void;
+}
+

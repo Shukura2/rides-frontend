@@ -13,13 +13,14 @@ import { authSelectors } from "@/features/userSlice";
 import { editUserProfile } from "@/services/passenger";
 import SnackbarNotification from "./SignUpPassenger/SnackbarNotification";
 import style from "./PagesStyle/style";
+import { EditProfileType } from "@/types";
 
-const EditProfile = ({ isOpen, handleClickClose, setIsOpen }) => {
-  const {
-    user: {
-      userInfo: { firstName, lastName },
-    },
-  } = useSelector(authSelectors);
+const EditProfile = ({
+  isOpen,
+  handleClickClose,
+  setIsOpen,
+}: EditProfileType) => {
+  const { firstName, lastName } = useSelector(authSelectors).user.userInfo!!;
 
   const [userData, setUserData] = useState({
     firstName,
@@ -28,7 +29,7 @@ const EditProfile = ({ isOpen, handleClickClose, setIsOpen }) => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChageUserData = (e) => {
+  const handleChageUserData = (e: any) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
@@ -45,7 +46,7 @@ const EditProfile = ({ isOpen, handleClickClose, setIsOpen }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     editProfile();
 

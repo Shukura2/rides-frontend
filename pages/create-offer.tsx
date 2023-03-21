@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DriverLayout from "@/components/layouts/DriverLayout";
 import { validateOffers } from "@/validationSchema/auth";
-import { OffersType } from "@/types";
+import { OffersType, OfferDetails } from "@/types";
 import { offerData } from "@/staticData/PassengerDashboard";
 import { createOffers } from "@/services/driver";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
@@ -35,7 +35,7 @@ const CreateOffers = (): JSX.Element => {
     },
     validationSchema: validateOffers,
     onSubmit: async (values, { resetForm }) => {
-      if (!userInfo.phoneNumber) {
+      if (userInfo && !userInfo.phoneNumber) {
         router.push("/telephone");
         return;
       } else {
@@ -71,8 +71,9 @@ const CreateOffers = (): JSX.Element => {
           variant="filled"
           message={successMessage}
         />
+
         <form onSubmit={formik.handleSubmit}>
-          {offerData.map((item) => {
+          {offerData.map((item: OfferDetails) => {
             const { label, type, name, placeholder } = item;
             return (
               <TextField

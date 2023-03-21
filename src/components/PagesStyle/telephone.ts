@@ -42,6 +42,9 @@ const style = {
   },
   customInput: {
     input: {
+      "&::after": {
+        color: "white !important",
+      },
       "&::placeholder": {
         color: "white !important",
         opacity: "1",

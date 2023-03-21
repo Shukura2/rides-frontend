@@ -12,7 +12,8 @@ const MyOffers = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [offerDetails, setOfferDetails] = useState({});
+  const [offerDetails, setOfferDetails] = useState<MyOffer | null>(null);
+  const [render, setRender] = useState<boolean>(false);
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
@@ -30,14 +31,15 @@ const MyOffers = (): JSX.Element => {
 
   useEffect(() => {
     offers();
-  }, []);
+  }, [render]);
 
   if (isLoading) {
     return <h4>Loading...</h4>;
   }
 
   const handleDelete = async (id: string) => {
-    const del = offersData?.filter((data) => data.ride_offer_id !== id);
+    if (!offersData) return;
+    const del = offersData.filter((data) => data.ride_offer_id !== id);
     setOffersData(del);
     try {
       const delOffer = await deleteMyOffer(id);
@@ -48,13 +50,14 @@ const MyOffers = (): JSX.Element => {
   };
 
   const handleEdit = (id: string) => {
-    const data = offersData?.find((item) => item.ride_offer_id === id);
-    setOfferDetails(data);
+    if (!offersData) return;
+    const data = offersData.find((item) => item.ride_offer_id === id);
+    setOfferDetails(data as MyOffer);
   };
 
   return (
     <div style={{ overflowX: "auto" }}>
-      {offersData?.length > 0 ? (
+      {offersData && offersData?.length > 0 ? (
         <table
           width="100%"
           style={{
@@ -84,6 +87,8 @@ const MyOffers = (): JSX.Element => {
                   handleDelete={handleDelete}
                   offerDetails={offerDetails}
                   setOfferDetails={setOfferDetails}
+                  render={render}
+                  setRender={setRender}
                 />
               );
             })}

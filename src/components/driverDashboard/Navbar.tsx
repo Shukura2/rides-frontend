@@ -17,8 +17,11 @@ import DriverDrawer from "./Drawer";
 import { getProfilePic } from "@/services/user";
 import { authSelectors, logout } from "@/features/userSlice";
 import EditProfile from "../EditProfile";
+import { handleClickType } from "@/types";
 
-const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
+const DriverDashboardNavbar = ({
+  handleClick,
+}: handleClickType): JSX.Element => {
   const {
     user: { userInfo },
   } = useSelector(authSelectors);
@@ -53,6 +56,7 @@ const DriverDashboardNavbar = ({ handleClick }): JSX.Element => {
   const handleUserLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
+    router.push("/login");
   };
 
   const getUserPic = async () => {

@@ -36,10 +36,8 @@ const style = {
     alignItems: "center",
     background: color.white.main,
     color: color.black.main,
-    padding: "10px 20px",
-    borderRadius: "20px",
+    padding: "5px 10px",
     textTransform: "uppercase",
-    marginBottom: "20px",
   },
   authText: {
     marginLeft: "10px",

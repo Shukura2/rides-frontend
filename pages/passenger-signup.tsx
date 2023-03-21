@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
@@ -18,6 +18,8 @@ import style from "@/components/SignUpPassenger/style";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 import GoogleIcon from "../public/images/GoogleIcon";
 import { addPassenger } from "@/features/userSlice";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const SignUpPassenger = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,6 +52,7 @@ const SignUpPassenger = (): JSX.Element => {
       }
     },
   });
+
   return (
     <Box sx={style.wrap}>
       <Box sx={style.container}>
@@ -82,7 +85,7 @@ const SignUpPassenger = (): JSX.Element => {
 
             <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Link href="/">
+                <Link href={`${API_URL}/v1/auth/google`}>
                   <Box sx={style.authWrap}>
                     <GoogleIcon />
                     <Typography sx={style.authText}>

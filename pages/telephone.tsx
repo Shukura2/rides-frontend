@@ -39,7 +39,7 @@ const Telephone = (): JSX.Element => {
         const originalPromiseResult = unwrapResult(addPhone);
         setSuccessMessage(originalPromiseResult.message);
         resetForm();
-        if (!userInfo.profilePic) {
+        if (userInfo && !userInfo.profilePic) {
           setTimeout(() => {
             router.push("/upload-profile-pic");
           }, 3000);
@@ -97,7 +97,6 @@ const Telephone = (): JSX.Element => {
                   formik.touched["phoneNumber"] && formik.errors["phoneNumber"]
                 }
                 sx={style.customInput}
-                color="white"
                 fullWidth
               />
             </Box>
