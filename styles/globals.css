@@ -21,7 +21,6 @@ html {
 body {
   font-family: var(--lexend-font);
   font-size: 16px;
-  /* font-weight: 400; */
   line-height: 1.5;
   zoom: 90%;
   height: 100%;

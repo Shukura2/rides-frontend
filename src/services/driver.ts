@@ -22,7 +22,6 @@ export const createOffers = async (
 
 export const userJoinRide = async (): Promise<OfferDataType> => {
   const { data } = await axios.get(`${API_URL}/v1/passenger/joined`);
-
   return data;
 };
 

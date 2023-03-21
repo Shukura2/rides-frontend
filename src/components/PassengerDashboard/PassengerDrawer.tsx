@@ -11,8 +11,9 @@ import Logo from "../Logo";
 import color from "@/assets/base/colors";
 import style from "./style";
 import { pages } from "@/staticData/PassengerDashboard";
+import { OpenType } from "@/types";
 
-const PassengerDrawer = ({ open, setOpen }): JSX.Element => {
+const PassengerDrawer = ({ open, setOpen }: OpenType): JSX.Element => {
   const handleCloseDrawer = () => {
     setOpen(!open);
   };

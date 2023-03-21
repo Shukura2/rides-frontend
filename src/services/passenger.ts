@@ -1,5 +1,11 @@
 import axios from "axios";
-import { OffersResponse, FormValues, historyType, responseType } from "@/types";
+import {
+  OffersResponse,
+  FormValues,
+  historyType,
+  responseType,
+  Joins,
+} from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,7 +16,7 @@ export const getAllOffers = async (
   const { data } = await axios.get(
     `${API_URL}/v1/driver/offers?page=${page}&size=${size}`
   );
-  return data as OffersResponse;
+  return data;
 };
 
 export const editUserProfile = async (
@@ -32,9 +38,7 @@ export const joinRide = async (rideId: string) => {
   return data;
 };
 
-export const getSelectRide = async (
-  rideOfferId: string
-): Promise<OffersResponse> => {
+export const getSelectRide = async (rideOfferId: string): Promise<Joins> => {
   const { data } = await axios.get(
     `${API_URL}/v1/passenger/select-offer/${rideOfferId}`
   );

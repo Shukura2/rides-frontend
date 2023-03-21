@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FormValues, responseType, inputValue } from "@/types";
+import { userStateProps } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,7 +11,7 @@ export const getProfilePic = async () => {
 
 export const addPhoneNumber = async (
   values: FormValues
-): Promise<FormValues> => {
+): Promise<userStateProps> => {
   const { data } = await axios({
     method: "PUT",
     url: `${API_URL}/v1/user/add-phone-number`,

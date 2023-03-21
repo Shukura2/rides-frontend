@@ -9,7 +9,7 @@ import styleOffer from "@/components/PagesStyle/style";
 
 const UserJoin = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);
-  const [offers, setOffers] = useState<null | OffersResponseType>(null);
+  const [offers, setOffers] = useState<OffersResponseType | null>(null);
 
   const getUserJoinedRide = async () => {
     setIsloading(true);
@@ -33,7 +33,9 @@ const UserJoin = (): JSX.Element => {
 
   return (
     <>
-      {offers && (
+      {!offers ? (
+        <Typography>No join yet </Typography>
+      ) : (
         <Box sx={styleOffer.offersWrap}>
           <Box sx={style.ridesCard}>
             <Box component="img" src={offers.profilePic} sx={style.driverImg} />

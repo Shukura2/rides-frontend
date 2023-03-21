@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
@@ -15,6 +15,15 @@ import SnackbarNotification from "../SignUpPassenger/SnackbarNotification";
 import { MyOffer } from "@/types";
 import style from "../PagesStyle/style";
 
+type OfferType = MyOffer & {
+  handleEdit: (id: string) => void;
+  handleDelete: (id: string) => void;
+  offerDetails: MyOffer | any;
+  setOfferDetails: Dispatch<MyOffer | any>;
+  render: boolean;
+  setRender: Dispatch<SetStateAction<boolean>>;
+};
+
 const OfferData = ({
   amount,
   created_at,
@@ -26,7 +35,9 @@ const OfferData = ({
   handleEdit,
   offerDetails,
   setOfferDetails,
-}: MyOffer) => {
+  render,
+  setRender,
+}: OfferType) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -44,9 +55,11 @@ const OfferData = ({
   };
 
   const editOffer = async () => {
+    if (!offerDetails) return;
     try {
       const response = await editMyOffer(ride_offer_id, offerDetails);
       setSuccessMessage(response.message);
+      setRender(!render);
     } catch (error: any) {
       setErrorMessage(error.message);
     }
@@ -102,7 +115,7 @@ const OfferData = ({
                 label="Location"
                 type="text"
                 name="location"
-                value={offerDetails.location}
+                value={offerDetails && offerDetails.location}
                 onChange={handleChange}
                 fullWidth
                 focused
@@ -112,7 +125,7 @@ const OfferData = ({
                 label="Destination"
                 type="text"
                 name="destination"
-                value={offerDetails.destination}
+                value={offerDetails && offerDetails.destination}
                 onChange={handleChange}
                 fullWidth
                 focused
@@ -122,7 +135,7 @@ const OfferData = ({
                 label="Amount"
                 type="number"
                 name="amount"
-                value={offerDetails.amount}
+                value={offerDetails && offerDetails.amount}
                 onChange={handleChange}
                 fullWidth
                 focused

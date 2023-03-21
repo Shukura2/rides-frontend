@@ -3,11 +3,25 @@ import { loginUsers, signupDriver, signupUser } from "@/services/auth";
 import { addPhoneNumber } from "@/services/user";
 import { FormValues, LoginValues } from "@/types";
 import { RootState } from "@/redux/store";
+import { userStateProps, initialStateProp } from "@/types";
 
-const initialState = {
+const initialState: initialStateProp = {
   error: "",
   success: false,
-  user: {},
+  user: {
+    message: "",
+    success: false,
+    token: "",
+    userInfo: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      profilePic: "",
+      userId: "",
+      userType: "",
+    },
+  },
 };
 
 export const addPassenger = createAsyncThunk(
@@ -63,7 +77,20 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.user = {};
+      state.user = {
+        message: "",
+        success: false,
+        token: "",
+        userInfo: {
+          email: "",
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          profilePic: "",
+          userId: "",
+          userType: "",
+        },
+      };
       state.error = "";
       state.success = false;
     },
@@ -80,7 +107,7 @@ const authSlice = createSlice({
         state.success = false;
       }
       if (action.payload) {
-        state.user = action.payload;
+        state.user = action.payload as userStateProps;
       }
     });
     builder.addCase(addDriver.fulfilled, (state, action) => {
@@ -94,7 +121,7 @@ const authSlice = createSlice({
         state.success = false;
       }
       if (action.payload) {
-        state.user = action.payload;
+        state.user = action.payload as userStateProps;
       }
     });
     builder.addCase(userLogin.fulfilled, (state, action) => {
@@ -108,11 +135,11 @@ const authSlice = createSlice({
         state.success = false;
       }
       if (action.payload) {
-        state.user = action.payload;
+        state.user = action.payload as userStateProps;
       }
     });
     builder.addCase(addUserPhoneNumber.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload as userStateProps;
       state.success = true;
       state.error = "";
     });
@@ -122,7 +149,7 @@ const authSlice = createSlice({
         state.success = false;
       }
       if (action.payload) {
-        state.user = action.payload;
+        state.user = action.payload as userStateProps;
       }
     });
   },

@@ -8,11 +8,11 @@ import PassengerLayout from "@/components/layouts/PassengerLayout";
 import { getAllOffers } from "@/services/passenger";
 import style from "@/components/PassengerDashboard/style";
 import Offer from "@/components/PassengerDashboard/Offer";
-import { Offers } from "@/types/responses";
+import { JoinOffers } from "@/types/responses";
 
 const Dashboard = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);
-  const [rides, setRides] = useState<null | Offers[]>(null);
+  const [rides, setRides] = useState<null | JoinOffers[]>(null);
   const [page, setPage] = useState<number>(0);
   const [size, setSize] = useState<number>(3);
   const [totalPages, setTotalPages] = useState<number>(1);

@@ -9,13 +9,21 @@ import { getSelectRide } from "@/services/passenger";
 import PassengerLayout from "@/components/layouts/PassengerLayout";
 import { joinRide } from "@/services/passenger";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { Offers } from "@/types/responses";
+import { SelectedJoin } from "@/types/responses";
 import style from "@/components/PagesStyle/joinRide";
 
 const SingleOffer = (): JSX.Element => {
   const router = useRouter();
   const { rideOfferId } = router.query;
-  const [offerData, setOfferData] = useState<{} | Offers>({});
+  const [offerData, setOfferData] = useState<SelectedJoin>({
+    driverFirstName: "",
+    driverLastName: "",
+    driverPhoneNumber: "",
+    driverProfilePic: "",
+    amount: 0,
+    location: "",
+    destination: "",
+  });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [disable, setDisable] = useState<boolean>(false);
@@ -24,7 +32,7 @@ const SingleOffer = (): JSX.Element => {
   const handleSuccessClose = () => setSuccessMessage("");
 
   const getRides = async () => {
-    const response = await getSelectRide(rideOfferId);
+    const response = await getSelectRide(rideOfferId as string);
     setOfferData(response.message);
   };
 
@@ -35,7 +43,7 @@ const SingleOffer = (): JSX.Element => {
 
   const userJoinRide = async () => {
     try {
-      const response = await joinRide(rideOfferId);
+      const response = await joinRide(rideOfferId as string);
       setSuccessMessage(response.message);
       setDisable(true);
     } catch (error: any) {

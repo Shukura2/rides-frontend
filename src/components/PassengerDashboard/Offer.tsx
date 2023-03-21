@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import style from "./style";
-import { Offers } from "@/types/responses";
+import { JoinOffers } from "@/types/responses";
 import { authSelectors } from "@/features/userSlice";
 
 const Offer = ({
@@ -17,7 +17,7 @@ const Offer = ({
   amount,
   location,
   destination,
-}: Offers) => {
+}: JoinOffers) => {
   const router = useRouter();
 
   const {
@@ -27,11 +27,11 @@ const Offer = ({
   const handleRoute = () => {
     localStorage.setItem("offerId", JSON.stringify(rideOfferId));
 
-    if (!userInfo.phoneNumber) {
+    if (userInfo && !userInfo.phoneNumber) {
       router.push("/telephone");
       return;
     }
-    if (!userInfo.profilePic) {
+    if (userInfo && !userInfo.profilePic) {
       router.push("/upload-profile-pic");
       return;
     }

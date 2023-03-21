@@ -19,8 +19,9 @@ import { getProfilePic } from "@/services/user";
 import { authSelectors } from "@/features/userSlice";
 import EditProfile from "../EditProfile";
 import { logout } from "@/features/userSlice";
+import { handleClickType } from "@/types";
 
-const Navbar = ({ handleClick }): JSX.Element | null => {
+const Navbar = ({ handleClick }: handleClickType): JSX.Element | null => {
   const {
     user: { userInfo },
   } = useSelector(authSelectors);
@@ -56,6 +57,7 @@ const Navbar = ({ handleClick }): JSX.Element | null => {
   const handleUserLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
+    router.push("/login");
   };
 
   const getUserPic = async () => {
