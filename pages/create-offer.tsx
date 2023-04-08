@@ -38,6 +38,9 @@ const CreateOffers = (): JSX.Element => {
       if (userInfo && !userInfo.phoneNumber) {
         router.push("/telephone");
         return;
+      } else if (userInfo && !userInfo.profilePic) {
+        router.push("/upload-profile-pic");
+        return;
       } else {
         setIsloading(true);
         try {
