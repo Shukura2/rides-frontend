@@ -54,7 +54,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Box sx={{ padding: { xs: "5px", md: "25px" } }}>
-      <Typography sx={style.head}>Meet available driver's</Typography>
+      <Typography sx={style.head}>Meet available driver&apos;s</Typography>
       <Box sx={style.ridesWrap}>
         {rides &&
           rides.map((ride) => <Offer key={ride.ride_offer_id} {...ride} />)}

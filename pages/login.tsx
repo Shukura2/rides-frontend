@@ -113,7 +113,7 @@ const LoginPassenger = (): JSX.Element => {
               </Button>
             </form>
             <Box sx={style.createAcct}>
-              <Typography>Don't have an account?</Typography>
+              <Typography>Don&apos;t have an account?</Typography>
               <Link href="/passenger-signup">
                 <Typography sx={style.linkBtn}>Create Account</Typography>
               </Link>
