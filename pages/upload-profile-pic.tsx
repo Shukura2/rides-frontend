@@ -28,7 +28,7 @@ const UploadProfilePic = (): JSX.Element => {
 
   useEffect(() => {
     if (userInfo?.userType === "passenger") {
-      const getOfferId = JSON.parse(localStorage.getItem("offerId") || "");
+      const getOfferId = JSON.parse(localStorage.getItem("offerId")!!);
       if (getOfferId) {
         setRideOfferId(getOfferId);
         return;
