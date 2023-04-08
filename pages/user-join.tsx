@@ -33,9 +33,8 @@ const UserJoin = (): JSX.Element => {
 
   return (
     <>
-      {!offers ? (
-        <Typography>No join yet </Typography>
-      ) : (
+      {offers && !offers.firstName && <Typography>No join yet </Typography>}
+      {offers && offers.firstName && (
         <Box sx={styleOffer.offersWrap}>
           <Box sx={style.ridesCard}>
             <Box component="img" src={offers.profilePic} sx={style.driverImg} />

@@ -43,7 +43,7 @@ export const updatePassword = async (values: inputValue) => {
 export const uploadProfilePics = async (formData: FormData) => {
   const { data } = await axios({
     method: "POST",
-    url: `http://localhost:5500/v1/user/upload`,
+    url: `${API_URL}/v1/user/upload`,
     data: formData,
   });
   return data;

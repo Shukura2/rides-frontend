@@ -4,9 +4,8 @@ html {
   height: 100%;
   font-family: var(--lexend-font);
 }
-/* Variable declarations */
 :root {
-  --lexend-font: 'Lexend', sans-serif;;
+  --lexend-font: 'Lexend', sans-serif;
   --white: #ffffff;
 }
 *,
@@ -33,7 +32,6 @@ body > #__next {
 a {
   text-decoration: none;
 }
-
 ul {
   list-style: none;
 }
