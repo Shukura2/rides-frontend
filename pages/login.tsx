@@ -36,7 +36,7 @@ const LoginPassenger = (): JSX.Element => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const resultAction = await dispatch(userLogin(values));
-        const originalPromiseResult = unwrapResult(resultAction);
+        const originalPromiseResult = await unwrapResult(resultAction);
         setSuccessMessage(originalPromiseResult.message);
 
         const { userType } = originalPromiseResult.userInfo;

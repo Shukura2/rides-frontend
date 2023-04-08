@@ -13,6 +13,7 @@ export const setAuthorizationToken = (token: string) => {
 };
 
 const TokenValidate = ({ children }: ChildrenProps): JSX.Element => {
+  const [access, setAccess] = useState(false);
   const router = useRouter();
   const { user } = useSelector(authSelectors) || {};
 
@@ -27,6 +28,7 @@ const TokenValidate = ({ children }: ChildrenProps): JSX.Element => {
       return router.push("/login");
     }
     setAuthorizationToken(user.token);
+    setAccess(true);
   };
 
   useEffect(() => {
@@ -37,7 +39,8 @@ const TokenValidate = ({ children }: ChildrenProps): JSX.Element => {
     isTokenValidate();
   }, []);
 
-  return <>{children}</>;
+  if (access) return <div> {children}</div>;
+  return <></>;
 };
 
 export default TokenValidate;
