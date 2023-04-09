@@ -31,14 +31,6 @@ const UploadProfilePic = (): JSX.Element => {
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
 
-  useEffect(() => {
-    const getOfferId = JSON.parse(localStorage.getItem("offerId")!!);
-    if (getOfferId) {
-      setRideOfferId(getOfferId);
-      return;
-    }
-  }, []);
-
   return (
     <Box sx={{ maxWidth: "1536px", margin: "0 auto" }}>
       <Formik
