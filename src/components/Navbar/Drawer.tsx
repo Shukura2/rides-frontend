@@ -7,8 +7,8 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
-import { pages } from "@/staticData/NavbarData";
-import { NavLink } from "@/types/links";
+import { pages } from "../../staticData/NavbarData";
+import { NavLink } from "../../types";
 import style from "./style";
 
 const DrawerComponent = (): JSX.Element => {
@@ -23,11 +23,7 @@ const DrawerComponent = (): JSX.Element => {
               <ListItem key={link} onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
                   <Link href={path}>
-                    <Typography
-                      sx={style.drawerLink}
-                    >
-                      {link}
-                    </Typography>
+                    <Typography sx={style.drawerLink}>{link}</Typography>
                   </Link>
                 </ListItemText>
               </ListItem>

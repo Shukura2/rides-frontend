@@ -7,9 +7,9 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../Logo";
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
 import style from "../PassengerDashboard/style";
-import { pages } from "@/staticData/driverDashboard";
+import { pages } from "../../staticData/driverDashboard";
 
 interface Props {
   open: boolean;

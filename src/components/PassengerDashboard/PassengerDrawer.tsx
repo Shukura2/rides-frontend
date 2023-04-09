@@ -8,10 +8,10 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logo from "../Logo";
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
+import { pages } from "../../staticData/PassengerDashboard";
 import style from "./style";
-import { pages } from "@/staticData/PassengerDashboard";
-import { OpenType } from "@/types";
+import { OpenType } from "../../types";
 
 const PassengerDrawer = ({ open, setOpen }: OpenType): JSX.Element => {
   const handleCloseDrawer = () => {

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch } from "../src/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Grid";
@@ -11,12 +11,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { loginField } from "@/staticData/authData";
-import { validateLogin } from "@/validationSchema/auth";
-import { LoginValues } from "@/types/auth";
-import style from "@/components/SignUpPassenger/style";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { userLogin } from "@/features/userSlice";
+import { loginField } from "../src/staticData/authData";
+import { validateLogin } from "../src/validationSchema/auth";
+import { LoginValues } from "../src/types";
+import style from "../src/components/SignUpPassenger/style";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
+import { userLogin } from "../src/features/userSlice";
 
 const LoginPassenger = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();

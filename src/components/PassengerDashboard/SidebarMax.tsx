@@ -4,9 +4,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
 import style from "./style";
-import { pages } from "@/staticData/PassengerDashboard";
+import { pages } from "../../staticData/PassengerDashboard";
 
 const SidebarMax = () => {
   const router = useRouter();

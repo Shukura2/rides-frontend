@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
-import PassengerLayout from "@/components/layouts/PassengerLayout";
-import { getRideHistory } from "@/services/passenger";
-import { rideHistoryType } from "@/types";
+import PassengerLayout from "../src/components/layouts/PassengerLayout";
+import { getRideHistory } from "../src/services/passenger";
+import { rideHistoryType } from "../src/types";
 
 const columns: GridColDef[] = [
   {

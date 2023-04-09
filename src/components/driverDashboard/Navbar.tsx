@@ -10,14 +10,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useMediaQuery, useTheme } from "@mui/material";
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
 import Logo from "../Logo";
-import style from "@/components/PassengerDashboard/style";
+import style from "../PassengerDashboard/style";
 import DriverDrawer from "./Drawer";
-import { authSelectors, logout } from "@/features/userSlice";
+import { authSelectors, logout } from "../../features/userSlice";
 import EditProfile from "../EditProfile";
-import { handleClickType } from "@/types";
-import { getProfilePic } from "@/services/user";
+import { handleClickType } from "../../types";
+import { getProfilePic } from "../../services/user";
 
 const DriverDashboardNavbar = ({
   handleClick,

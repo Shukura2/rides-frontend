@@ -1,4 +1,4 @@
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
 
 const style = {
   wrap: {

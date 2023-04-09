@@ -4,11 +4,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import PassengerLayout from "@/components/layouts/PassengerLayout";
-import { getAllOffers } from "@/services/passenger";
-import style from "@/components/PassengerDashboard/style";
-import Offer from "@/components/PassengerDashboard/Offer";
-import { JoinOffers } from "@/types/responses";
+import PassengerLayout from "../../src/components/layouts/PassengerLayout";
+import { getAllOffers } from "../../src/services/passenger";
+import style from "../../src/components/PassengerDashboard/style";
+import Offer from "../../src/components/PassengerDashboard/Offer";
+import { JoinOffers } from "../../src/types";
 
 const Dashboard = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);

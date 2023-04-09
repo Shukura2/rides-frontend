@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import style from "../PassengerDashboard/style";
-import { pages } from "@/staticData/driverDashboard";
+import { pages } from "../../staticData/driverDashboard";
 
 const SidebarMax = (): JSX.Element => {
   const router = useRouter();

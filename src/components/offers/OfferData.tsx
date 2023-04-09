@@ -10,9 +10,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { editMyOffer } from "@/services/driver";
+import { editMyOffer } from "../../services/driver";
 import SnackbarNotification from "../SignUpPassenger/SnackbarNotification";
-import { MyOffer } from "@/types";
+import { MyOffer } from "../../types";
 import style from "../PagesStyle/style";
 
 type OfferType = MyOffer & {

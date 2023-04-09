@@ -2,11 +2,11 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useMediaQuery, useTheme } from "@mui/material";
-import Navbar from "@/components/PassengerDashboard/Navbar";
-import SidebarMax from "@/components/PassengerDashboard/SidebarMax";
-import SidebarMin from "@/components/PassengerDashboard/SidebarMin";
-import style from "@/components/PassengerDashboard/style";
-import color from "@/assets/base/colors";
+import Navbar from "../../PassengerDashboard/Navbar";
+import SidebarMax from "../../DriverDashboard/SidebarMax";
+import SidebarMin from "../../PassengerDashboard/SidebarMin";
+import style from "../../PassengerDashboard/style";
+import color from "../../../assets/base/colors";
 
 const PassengerLayout = (page: any) => {
   const theme = useTheme();

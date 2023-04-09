@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
-import store from "@/redux/store";
-import theme from "@/assets/base";
-import TokenValidate from "@/utils/tokenValidate";
+import store from "../src/redux/store";
+import theme from "../src/assets/base";
+import TokenValidate from "../src/utils/tokenValidate";
 import "../styles/globals.css";
 
 type NextPageWithLayout = NextPage & {

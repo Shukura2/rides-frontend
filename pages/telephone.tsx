@@ -2,19 +2,19 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch } from "../src/redux/store";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { FormValues } from "@/types";
-import { phoneNumberValidate } from "@/validationSchema/auth";
-import { addUserPhoneNumber } from "@/features/userSlice";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import style from "@/components/PagesStyle/telephone";
-import { authSelectors } from "@/features/userSlice";
+import { FormValues } from "../src/types";
+import { phoneNumberValidate } from "../src/validationSchema/auth";
+import { addUserPhoneNumber } from "../src/features/userSlice";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
+import style from "../src/components/PagesStyle/telephone";
+import { authSelectors } from "../src/features/userSlice";
 
 const Telephone = (): JSX.Element => {
   const router = useRouter();

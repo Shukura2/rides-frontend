@@ -5,11 +5,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import MainLayout from "@/components/layouts/MainLayout";
-import { validatePassword } from "@/validationSchema/auth";
-import style from "@/components/PagesStyle/recoverPassword";
-import { updatePassword } from "@/services/user";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
+import MainLayout from "../../src/components/layouts/MainLayout";
+import { validatePassword } from "../../src/validationSchema/auth";
+import style from "../../src/components/PagesStyle/recoverPassword";
+import { updatePassword } from "../../src/services/user";
+import SnackbarNotification from "../../src/components/SignUpPassenger/SnackbarNotification";
 
 const UpdatePassword = (): JSX.Element => {
   const [successMessage, setSuccessMessage] = useState<string>("");

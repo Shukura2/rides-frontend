@@ -1,14 +1,12 @@
 import Link from "next/link";
 import Typography from "@mui/material/Typography";
 import style from "./style";
-import { Props } from "@/types/props";
+import { Props } from "../../types";
 
 const Logo = ({ text }: Props) => {
   return (
     <Link href="/">
-      <Typography sx={style.rides}>
-        {text}
-      </Typography>
+      <Typography sx={style.rides}>{text}</Typography>
     </Link>
   );
 };

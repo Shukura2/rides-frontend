@@ -6,13 +6,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import DriverLayout from "@/components/layouts/DriverLayout";
-import { validateOffers } from "@/validationSchema/auth";
-import { OffersType, OfferDetails } from "@/types";
-import { offerData } from "@/staticData/PassengerDashboard";
-import { createOffers } from "@/services/driver";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { authSelectors } from "@/features/userSlice";
+import DriverLayout from "../src/components/layouts/DriverLayout";
+import { validateOffers } from "../src/validationSchema/auth";
+import { OffersType, OfferDetails } from "../src/types";
+import { createOffers } from "../src/services/driver";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
+import { authSelectors } from "../src/features/userSlice";
+import { offerData } from "../src/staticData/PassengerDashboard";
 
 const CreateOffers = (): JSX.Element => {
   const router = useRouter();

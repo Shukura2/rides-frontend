@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { userJoinRide } from "@/services/driver";
-import DriverLayout from "@/components/layouts/DriverLayout";
-import style from "@/components/PassengerDashboard/style";
-import { OffersResponseType } from "@/types";
-import styleOffer from "@/components/PagesStyle/style";
+import { userJoinRide } from "../src/services/driver";
+import DriverLayout from "../src/components/layouts/DriverLayout";
+import style from "../src/components/PassengerDashboard/style";
+import { OffersResponseType } from "../src/types";
+import styleOffer from "../src/components/PagesStyle/style";
 
 const UserJoin = (): JSX.Element => {
   const [isLoading, setIsloading] = useState<boolean>(false);

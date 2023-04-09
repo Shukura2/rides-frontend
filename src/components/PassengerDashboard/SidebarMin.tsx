@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import style from "./style";
-import { pages } from "@/staticData/PassengerDashboard";
+import { pages } from "../../staticData/PassengerDashboard";
 
 const SidebarMin = () => {
   const router = useRouter();

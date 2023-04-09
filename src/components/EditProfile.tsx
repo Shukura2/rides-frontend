@@ -9,11 +9,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { authSelectors } from "@/features/userSlice";
-import { editUserProfile } from "@/services/passenger";
+import { authSelectors } from "../features/userSlice";
+import { editUserProfile } from "../services/passenger";
 import SnackbarNotification from "./SignUpPassenger/SnackbarNotification";
 import style from "./PagesStyle/style";
-import { EditProfileType } from "@/types";
+import { EditProfileType } from "../types";
 
 const EditProfile = ({
   isOpen,

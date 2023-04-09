@@ -1,9 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUsers, signupDriver, signupUser } from "@/services/auth";
-import { addPhoneNumber, uploadProfilePics } from "@/services/user";
-import { FormValues, LoginValues } from "@/types";
-import { RootState } from "@/redux/store";
-import { userStateProps, initialStateProp } from "@/types";
+import { loginUsers, signupDriver, signupUser } from "../services/auth";
+import { addPhoneNumber, uploadProfilePics } from "../services/user";
+import {
+  FormValues,
+  LoginValues,
+  userStateProps,
+  initialStateProp,
+} from "../types";
+import { RootState } from "../redux/store";
 
 const initialState: initialStateProp = {
   error: "",

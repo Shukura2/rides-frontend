@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import DriverLayout from "@/components/layouts/DriverLayout";
-import { getMyOffers } from "@/services/driver";
-import OfferData from "@/components/offers/OfferData";
-import { deleteMyOffer } from "@/services/driver";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { MyOffer } from "@/types";
+import DriverLayout from "../src/components/layouts/DriverLayout";
+import { getMyOffers } from "../src/services/driver";
+import OfferData from "../src/components/offers/OfferData";
+import { deleteMyOffer } from "../src/services/driver";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
+import { MyOffer } from "../src/types";
 
 const MyOffers = (): JSX.Element => {
   const [offersData, setOffersData] = useState<null | MyOffer[]>(null);

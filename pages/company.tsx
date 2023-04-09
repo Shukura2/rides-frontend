@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import MainLayout from "@/components/layouts/MainLayout";
-import style from "@/components/PagesStyle/style";
+import MainLayout from "../src/components/layouts/MainLayout";
+import style from "../src/components/PagesStyle/style";
 
 const OurCompany = (): JSX.Element => {
   return (

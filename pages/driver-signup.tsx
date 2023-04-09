@@ -4,20 +4,20 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch } from "../src/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { signUpField } from "@/staticData/authData";
-import { FormValues } from "@/types/auth";
-import { validateSignup } from "@/validationSchema/auth";
-import style from "@/components/SignUpPassenger/style";
+import { signUpField } from "../src/staticData/authData";
+import { FormValues } from "../src/types";
+import { validateSignup } from "../src/validationSchema/auth";
+import style from "../src/components/SignUpPassenger/style";
+import { addDriver } from "../src/features/userSlice";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
 import GoogleIcon from "../public/images/GoogleIcon";
-import { addDriver } from "@/features/userSlice";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
 
 const DriverSignup = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();

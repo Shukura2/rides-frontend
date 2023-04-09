@@ -1,6 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { SnackbarTypes } from "@/types/auth";
+import { SnackbarTypes } from "../../types";
 
 const SnackbarNotification = ({
   open,

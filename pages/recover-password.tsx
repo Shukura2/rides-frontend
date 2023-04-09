@@ -5,12 +5,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import MainLayout from "@/components/layouts/MainLayout";
-import { validateEmail } from "@/validationSchema/auth";
-import style from "@/components/PagesStyle/recoverPassword";
-import { resetPassword } from "@/services/user";
-import { FormValues } from "@/types";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
+import { validateEmail } from "../src/validationSchema/auth";
+import MainLayout from "../src/components/layouts/MainLayout";
+import style from "../src/components/PagesStyle/recoverPassword";
+import { resetPassword } from "../src/services/user";
+import { FormValues } from "../src/types";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
 
 const RecoverPassword = (): JSX.Element => {
   const [successMessage, setSuccessMessage] = useState<string>("");

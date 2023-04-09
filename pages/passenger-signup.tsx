@@ -4,20 +4,20 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch } from "../src/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { validateSignup } from "@/validationSchema/auth";
-import { signUpField } from "@/staticData/authData";
-import { FormValues } from "@/types/auth";
-import style from "@/components/SignUpPassenger/style";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
+import { validateSignup } from "../src/validationSchema/auth";
+import { signUpField } from "../src/staticData/authData";
+import { FormValues } from "../src/types";
+import style from "../src/components/SignUpPassenger/style";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
 import GoogleIcon from "../public/images/GoogleIcon";
-import { addPassenger } from "@/features/userSlice";
+import { addPassenger } from "../src/features/userSlice";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

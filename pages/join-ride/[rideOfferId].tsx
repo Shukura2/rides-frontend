@@ -5,12 +5,12 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { getSelectRide } from "@/services/passenger";
-import PassengerLayout from "@/components/layouts/PassengerLayout";
-import { joinRide } from "@/services/passenger";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { SelectedJoin } from "@/types/responses";
-import style from "@/components/PagesStyle/joinRide";
+import { getSelectRide } from "../../src/services/passenger";
+import PassengerLayout from "../../src/components/layouts/PassengerLayout";
+import { joinRide } from "../../src/services/passenger";
+import SnackbarNotification from "../../src/components/SignUpPassenger/SnackbarNotification";
+import { SelectedJoin } from "../../src/types";
+import style from "../../src/components/PagesStyle/joinRide";
 
 const SingleOffer = (): JSX.Element => {
   const router = useRouter();

@@ -11,15 +11,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useMediaQuery, useTheme } from "@mui/material";
-import color from "@/assets/base/colors";
+import color from "../../assets/base/colors";
 import Logo from "../Logo";
 import PassengerDrawer from "./PassengerDrawer";
 import style from "./style";
-import { getProfilePic } from "@/services/user";
-import { authSelectors } from "@/features/userSlice";
+import { getProfilePic } from "../../services/user";
+import { authSelectors } from "../../features/userSlice";
+import { logout } from "../../features/userSlice";
 import EditProfile from "../EditProfile";
-import { logout } from "@/features/userSlice";
-import { handleClickType } from "@/types";
+import { handleClickType } from "../../types";
 
 const Navbar = ({ handleClick }: handleClickType): JSX.Element | null => {
   const {

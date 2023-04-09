@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import style from "./style";
-import { JoinOffers } from "@/types/responses";
-import { authSelectors } from "@/features/userSlice";
+import { JoinOffers } from "../../types";
+import { authSelectors } from "../../features/userSlice";
 
 const Offer = ({
   ride_offer_id: rideOfferId,

@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import { Formik, Form } from "formik";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormHelperText from "@mui/material/FormHelperText";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { validateFileUpload } from "@/validationSchema/auth";
-import style from "@/components/PagesStyle/uploadStyle";
-import { authSelectors } from "@/features/userSlice";
-import { addProfilePic } from "@/features/userSlice";
-import { AppDispatch } from "@/redux/store";
-import { unwrapResult } from "@reduxjs/toolkit";
+import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
+import { validateFileUpload } from "../src/validationSchema/auth";
+import style from "../src/components/PagesStyle/uploadStyle";
+import { authSelectors } from "../src/features/userSlice";
+import { addProfilePic } from "../src/features/userSlice";
+import { AppDispatch } from "../src/redux/store";
 
 const UploadProfilePic = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +30,14 @@ const UploadProfilePic = (): JSX.Element => {
 
   const handleErrorClose = () => setErrorMessage("");
   const handleSuccessClose = () => setSuccessMessage("");
+
+  useEffect(() => {
+    const getOfferId = JSON.parse(localStorage.getItem("offerId")!!);
+    if (getOfferId) {
+      setRideOfferId(getOfferId);
+      return;
+    }
+  }, []);
 
   return (
     <Box sx={{ maxWidth: "1536px", margin: "0 auto" }}>
@@ -48,7 +56,7 @@ const UploadProfilePic = (): JSX.Element => {
                 router.push("/create-offer");
                 return;
               }
-              router.push(`/join-ride/${rideOfferId}`)
+              router.push(`/join-ride/${rideOfferId}`);
             }, 2000);
           } catch (error: any) {
             setErrorMessage(error.response.data.message);

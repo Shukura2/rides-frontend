@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { authSelectors } from "@/features/userSlice";
-import { ChildrenProps } from "@/types";
+import { authSelectors } from "../features/userSlice";
+import { ChildrenProps } from "../types";
 
 export const setAuthorizationToken = (token: string) => {
   if (token) {

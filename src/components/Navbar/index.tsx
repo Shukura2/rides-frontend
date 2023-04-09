@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import DrawerComponent from "./Drawer";
-import { pages } from "@/staticData/NavbarData";
+import { pages } from "../../staticData/NavbarData";
+import { NavLink } from "../../types";
 import style from "./style";
-import { NavLink } from "@/types/links";
 import Logo from "../Logo";
 
 const Navbar = (): JSX.Element => {

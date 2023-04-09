@@ -1,4 +1,4 @@
-import { OfferDetails, Offers } from "@/types";
+import { OfferDetails, Offers } from "../types";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HistoryIcon from "@mui/icons-material/History";
 

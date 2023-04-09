@@ -9,9 +9,9 @@ import {
   socialMedia,
   footer,
   footerDetails,
-} from "@/staticData/FooterData";
+} from "../../staticData/FooterData";
 import style from "./style";
-import { DataItem, IconLink, LinkFooter } from "@/types/links";
+import { DataItem, IconLink, LinkFooter } from "../../types";
 
 const Footer = (): JSX.Element => {
   return (
@@ -25,23 +25,17 @@ const Footer = (): JSX.Element => {
             <Link href="/">
               <Box sx={style.langWrap}>
                 <LanguageIcon />
-                <Typography sx={style.text}>
-                  English
-                </Typography>
+                <Typography sx={style.text}>English</Typography>
               </Box>
             </Link>
           </Grid>
 
           {data.map((item: DataItem) => (
             <Grid item xs={12} sm={6} lg={3} key={item.title}>
-              <Typography sx={style.titles}>
-                {item.title}
-              </Typography>
+              <Typography sx={style.titles}>{item.title}</Typography>
               {item.others.map((info) => (
                 <Link href={info.link} key={info.label}>
-                  <Typography sx={style.texts}>
-                    {info.label}
-                  </Typography>
+                  <Typography sx={style.texts}>{info.label}</Typography>
                 </Link>
               ))}
             </Grid>
@@ -61,10 +55,7 @@ const Footer = (): JSX.Element => {
             </Box>
             <Box sx={style.footer}>
               {footer.map((item: string) => (
-                <Typography
-                  key={item}
-                  sx={style.fText}
-                >
+                <Typography key={item} sx={style.fText}>
                   {item}
                 </Typography>
               ))}
@@ -78,9 +69,7 @@ const Footer = (): JSX.Element => {
                 const { label, link } = item;
                 return (
                   <Link href={link} key={label}>
-                    <Typography sx={style.label}>
-                      {label}
-                    </Typography>
+                    <Typography sx={style.label}>{label}</Typography>
                   </Link>
                 );
               })}

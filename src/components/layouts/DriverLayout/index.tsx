@@ -2,10 +2,10 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import DriverDashboardNavbar from "@/components/DriverDashboard/Navbar";
-import SidebarMax from "@/components/DriverDashboard/SidebarMax";
-import style from "@/components/PassengerDashboard/style";
-import color from "@/assets/base/colors";
+import DriverDashboardNavbar from "../../DriverDashboard/Navbar";
+import SidebarMax from "../../DriverDashboard/SidebarMax";
+import style from "../../PassengerDashboard/style";
+import color from "../../../assets/base/colors";
 
 const DriverLayout = (page: any) => {
   const theme = useTheme();

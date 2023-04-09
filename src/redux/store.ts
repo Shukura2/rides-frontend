@@ -10,7 +10,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import authSlice from "@/features/userSlice";
+import authSlice from "../features/userSlice";
 
 const persistConfig = {
   key: "auth",
