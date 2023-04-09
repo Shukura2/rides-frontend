@@ -81,16 +81,6 @@ const DriverSignup = (): JSX.Element => {
             </Box>
 
             <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Link href="/">
-                  <Box sx={style.authWrap}>
-                    <GoogleIcon />
-                    <Typography sx={style.authText}>
-                      continue with google
-                    </Typography>
-                  </Box>
-                </Link>
-              </Box>
               {signUpField.map((field) => {
                 const { name, label, type, placeholder } = field;
                 return (
