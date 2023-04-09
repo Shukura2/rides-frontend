@@ -14,10 +14,10 @@ import color from "@/assets/base/colors";
 import Logo from "../Logo";
 import style from "@/components/PassengerDashboard/style";
 import DriverDrawer from "./Drawer";
-import { getProfilePic } from "@/services/user";
 import { authSelectors, logout } from "@/features/userSlice";
 import EditProfile from "../EditProfile";
 import { handleClickType } from "@/types";
+import { getProfilePic } from "@/services/user";
 
 const DriverDashboardNavbar = ({
   handleClick,

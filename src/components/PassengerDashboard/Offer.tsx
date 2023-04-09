@@ -19,7 +19,6 @@ const Offer = ({
   destination,
 }: JoinOffers) => {
   const router = useRouter();
-
   const {
     user: { userInfo },
   } = useSelector(authSelectors);

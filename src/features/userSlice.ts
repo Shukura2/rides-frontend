@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginUsers, signupDriver, signupUser } from "@/services/auth";
-import { addPhoneNumber } from "@/services/user";
+import { addPhoneNumber, uploadProfilePics } from "@/services/user";
 import { FormValues, LoginValues } from "@/types";
 import { RootState } from "@/redux/store";
 import { userStateProps, initialStateProp } from "@/types";
@@ -65,6 +65,18 @@ export const addUserPhoneNumber = createAsyncThunk(
   async (values: FormValues, { rejectWithValue }) => {
     try {
       const response = await addPhoneNumber(values);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const addProfilePic = createAsyncThunk(
+  "user/profilePic",
+  async (values: any, { rejectWithValue }) => {
+    try {
+      const response = await uploadProfilePics(values);
       return response;
     } catch (error: any) {
       return rejectWithValue(error.response.data);
@@ -144,6 +156,20 @@ const authSlice = createSlice({
       state.error = "";
     });
     builder.addCase(addUserPhoneNumber.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+        state.success = false;
+      }
+      if (action.payload) {
+        state.user = action.payload as userStateProps;
+      }
+    });
+    builder.addCase(addProfilePic.fulfilled, (state, action) => {
+      state.user = action.payload as userStateProps;
+      state.success = true;
+      state.error = "";
+    });
+    builder.addCase(addProfilePic.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
         state.success = false;

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,17 +8,22 @@ import Typography from "@mui/material/Typography";
 import FormHelperText from "@mui/material/FormHelperText";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import SnackbarNotification from "@/components/SignUpPassenger/SnackbarNotification";
-import { uploadProfilePics } from "@/services/user";
 import { validateFileUpload } from "@/validationSchema/auth";
 import style from "@/components/PagesStyle/uploadStyle";
 import { authSelectors } from "@/features/userSlice";
+import { addProfilePic } from "@/features/userSlice";
+import { AppDispatch } from "@/redux/store";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const UploadProfilePic = (): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const [fileInfo, setFileInfo] = useState<string>("");
+  const [rideOfferId, setRideOfferId] = useState<string>("");
+
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [rideOfferId, setRideOfferId] = useState<string>("");
+
   const {
     user: { userInfo },
   } = useSelector(authSelectors);
@@ -27,12 +32,9 @@ const UploadProfilePic = (): JSX.Element => {
   const handleSuccessClose = () => setSuccessMessage("");
 
   useEffect(() => {
-    if (userInfo?.userType === "passenger") {
-      const getOfferId = JSON.parse(localStorage.getItem("offerId")!!);
-      if (getOfferId) {
-        setRideOfferId(getOfferId);
-        return;
-      }
+    const getOfferId = JSON.parse(localStorage.getItem("offerId")!!);
+    if (getOfferId) {
+      setRideOfferId(getOfferId);
       return;
     }
   }, []);
@@ -46,15 +48,16 @@ const UploadProfilePic = (): JSX.Element => {
           const formData = new FormData();
           formData.append("image", values.image);
           try {
-            const upload = await uploadProfilePics(formData);
-            setSuccessMessage(upload.message);
+            const upload = await dispatch(addProfilePic(formData));
+            const originalPromiseResult = unwrapResult(upload);
+            setSuccessMessage(originalPromiseResult.message);
             setTimeout(() => {
               if (userInfo && userInfo.userType === "driver") {
                 router.push("/create-offer");
                 return;
               }
-              router.push(`/join-ride/${rideOfferId}`);
-            }, 3000);
+              router.push(`/join-ride/${rideOfferId}`)
+            }, 2000);
           } catch (error: any) {
             setErrorMessage(error.response.data.message);
             if (error.response.data.error) {
