@@ -49,5 +49,7 @@ If you found an issue or would like to submit an improvement to this project, pl
 
 ## Known issues (Work in progress)
 
-A user needs to login again to see edit profile updated. Sign up with google has not been completed yet.
+- A user needs to login again to see edit profile updated.
+- First time sign up might take few seconds to complete operation.
+- Sign up with google has not been completed yet.
 These are coming soon!
