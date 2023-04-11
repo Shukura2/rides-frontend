@@ -43,9 +43,7 @@ const SignUpPassenger = (): JSX.Element => {
         const resultAction = await dispatch(addPassenger(values));
         const originalPromiseResult = await unwrapResult(resultAction);
         setSuccessMessage(originalPromiseResult.message);
-        setTimeout(() => {
-          router.push("/available-rides");
-        }, 1500);
+        router.push("/available-rides");
         resetForm();
       } catch (error: any) {
         setErrorMessage(error.message);

@@ -41,9 +41,7 @@ const DriverSignup = (): JSX.Element => {
         const resultAction = await dispatch(addDriver(values));
         const originalPromiseResult = await unwrapResult(resultAction);
         setSuccessMessage(originalPromiseResult.message);
-        setTimeout(() => {
-          router.push("/create-offer");
-        }, 1500);
+        router.push("/create-offer");
         resetForm();
       } catch (error: any) {
         setErrorMessage(error.message);
