@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../src/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -17,7 +17,6 @@ import { validateSignup } from "../src/validationSchema/auth";
 import style from "../src/components/SignUpPassenger/style";
 import { addDriver } from "../src/features/userSlice";
 import SnackbarNotification from "../src/components/SignUpPassenger/SnackbarNotification";
-import GoogleIcon from "../public/images/GoogleIcon";
 
 const DriverSignup = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -129,4 +128,4 @@ const DriverSignup = (): JSX.Element => {
   );
 };
 
-export default DriverSignup;
+export default React.memo(DriverSignup);

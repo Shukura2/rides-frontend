@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../src/redux/store";
@@ -150,4 +150,4 @@ const SignUpPassenger = (): JSX.Element => {
   );
 };
 
-export default SignUpPassenger;
+export default React.memo(SignUpPassenger);
